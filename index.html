@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Tour of the Cell</title>
+    <meta name="description" content="Campbell Biology in Focus, chapter 4, A Tour of the Cell, as a real-time 3D scroll film: from a person to an atom, through eight microscopes, into the nucleus and out through the membrane." />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%2359e1ff' stroke-width='2'/%3E%3Ccircle cx='13' cy='15' r='4.5' fill='%234a6bff'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <canvas id="gl" aria-hidden="true"></canvas>
+
+    <!-- fixed chrome -------------------------------------------------------->
+    <header class="bar">
+      <a class="mark" href="#hero" data-to="0">A Tour of the Cell</a>
+      <p class="meta mono">Biology in Focus<span class="sep">·</span>Ch. 4<span class="sep">·</span>1 screen ≈ <span data-scale-bar>4 m</span></p>
+      <p class="chap mono"><span data-chnum>00</span><span class="sep">/</span>17 <span class="chname" data-chname>A Tour of the Cell</span></p>
+    </header>
+    <nav class="rail" aria-label="Chapters">
+      <div class="rail-line"><div class="rail-fill"></div></div>
+    </nav>
+    <div class="cursor" aria-hidden="true"><div class="cursor-ring"></div><div class="cursor-dot"></div></div>
+    <div class="labels" data-labels aria-hidden="true"></div>
+    <div class="scope-tag mono" data-scope aria-hidden="true"><span data-scope-a>Fluorescence</span><span data-scope-b>Fluorescence</span></div>
+
+    <main>
+      <!-- 00 · HERO ------------------------------------------------------------>
+      <section id="hero" class="hero" data-f0="0" data-f1="1" style="--h: 280vh">
+        <div class="sticky">
+          <h1 class="sr-only">A Tour of the Cell</h1>
+          <div class="hero-top mono">
+            <span>Campbell Biology in Focus · Chapter 4 · A tour of the cell</span>
+          </div>
+          <p class="hero-sub" data-lines>Every living thing is made of cells, the simplest collection of matter that can be alive. This is a tour of one: from the outside in, at every scale, through every instrument we have.</p>
+          <div class="hero-foot mono">
+            <span>1665 · Robert Hooke looks at cork through a lens and names its little boxes cells</span>
+            <span class="cue"><i></i>Scroll</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 · POWERS OF TEN ---------------------------------------------------->
+      <section id="ch1" class="chapter" data-f0="1" data-f1="2" style="--h: 640vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.1 · Fig. 4.2</span><h2 class="ch-title" data-chars>Powers of ten</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0,0.13">
+              <p class="eyebrow mono">The size range of cells</p>
+              <h3>From a person to an atom.</h3>
+              <p>Each step down the ruler on the right is <b>ten times smaller</b> than the last. Ten steps take you from your own height to the width of a carbon atom.</p>
+              <p class="note">1 mm = 10⁻³ m. 1 µm (micrometre) = 10⁻⁶ m. 1 nm (nanometre) = 10⁻⁹ m. The scale is logarithmic so that all of it fits.</p>
+            </article>
+            <article class="beat" data-at="0.13,0.3">
+              <p class="eyebrow mono">1 m → 1 mm</p>
+              <h3>Some cells are enormous.</h3>
+              <p>A single <b class="k" data-k="human">nerve cell</b> can run from your spine to your toes, about a metre. A <b class="k" data-k="chicken">chicken egg</b> and a <b class="k" data-k="frog">frog egg</b> are single cells too, swollen with yolk to feed an embryo.</p>
+              <p class="note">The unaided eye resolves about 0.1 mm. Everything below this point needs a microscope.</p>
+            </article>
+            <article class="beat" data-at="0.3,0.47">
+              <p class="eyebrow mono">10–100 µm</p>
+              <h3>The band where cells live.</h3>
+              <p>A <b class="k" data-k="egg">human egg</b>, about 100 µm, is at the very edge of sight. <b class="k" data-k="cell">Most plant and animal cells</b> are 10–100 µm across, and the <b class="k" data-k="nucleus">nucleus</b> inside them averages about 5 µm.</p>
+            </article>
+            <article class="beat predict" data-at="0.47,0.53">
+              <p class="eyebrow mono">Predict</p>
+              <h3>A typical bacterium beside a mitochondrion from one of your cells. Which is bigger?</h3>
+              <ol class="opts mono"><li><b>A</b>The bacterium, by ten times</li><li><b>B</b>About the same size</li><li><b>C</b>The mitochondrion, by ten times</li></ol>
+              <p class="hint mono">Both are on screen now ↓</p>
+            </article>
+            <article class="beat" data-at="0.53,0.66">
+              <p class="eyebrow mono">Answer · B · about 1 µm</p>
+              <h3>Bacteria and mitochondria: the same size.</h3>
+              <p><b class="k" data-k="bact">Most bacteria</b> are 1–5 µm; a <b class="k" data-k="mito">mitochondrion</b> is 1–10 µm long. The smallest cells known, the bacteria called <b class="k" data-k="myco">mycoplasmas</b>, are 0.1–1 µm: about the least that can hold enough DNA and enzymes to live.</p>
+              <p class="note">Hold that resemblance. It is not a coincidence (§4.5).</p>
+            </article>
+            <article class="beat" data-at="0.66,0.84">
+              <p class="eyebrow mono">Below the light microscope</p>
+              <h3>Viruses, ribosomes, proteins.</h3>
+              <p><b class="k" data-k="virus">Viruses</b> (tens to hundreds of nm) and <b class="k" data-k="ribo">ribosomes</b> (about 25 nm) are too small to resolve with light. A <b class="k" data-k="protein">protein</b> is a few nanometres; a <b class="k" data-k="lipid">lipid</b>, smaller still.</p>
+            </article>
+            <article class="beat" data-at="0.84,0.93">
+              <p class="eyebrow mono">≈ 0.1 nm</p>
+              <h3>Small molecules, then atoms.</h3>
+              <p>A sugar such as <b class="k" data-k="glucose">glucose</b> is under a nanometre. An <b class="k" data-k="atom">atom</b> is about a tenth of a nanometre: a hundred-thousandth the width of a cell.</p>
+              <p class="note">Its nucleus is 100 000 times smaller again, far too small to draw at this scale.</p>
+            </article>
+          </div>
+          <aside class="inst inst-ruler" aria-label="Size ruler">
+            <p class="mono label">Size, on a log scale</p>
+            <div class="ruler" data-ruler></div>
+          </aside>
+          <aside class="takeaway" data-take="0.93,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Most cells are 1–100 µm: too small to see, too large to be molecules.</span></li><li><span>Bacteria 1–5 µm; eukaryotic cells 10–100 µm; mitochondria about bacterial size.</span></li><li><span>Eye ≈ 0.1 mm; light microscope ≈ 200 nm; electron microscope ≈ 2 nm.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 02 · SEEING CELLS ----------------------------------------------------->
+      <section id="ch2" class="chapter" data-f0="2" data-f1="3" style="--h: 660vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.1 · Fig. 4.3</span><h2 class="ch-title" data-chars>Seeing cells</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0,0.14">
+              <p class="eyebrow mono">Microscopy</p>
+              <h3>Three numbers decide what you can see.</h3>
+              <p><b>Magnification</b>: image size over real size; a light microscope manages about 1 000×. <b>Resolution</b>: the smallest distance at which two points still look like two. <b>Contrast</b>: how different neighbouring parts look.</p>
+              <p class="note">Microscopes were invented in 1590. Antoni van Leeuwenhoek's lenses first showed living cells; in 1674 he showed Hooke his “very little animalcules”.</p>
+            </article>
+            <article class="beat" data-at="0.14,0.26">
+              <p class="eyebrow mono">Resolution · right panel</p>
+              <h3>Two points, closing in.</h3>
+              <p>Light blurs every point into a small disc. Closer than about <b>0.2 µm (200 nm)</b>, two discs merge into one, however much you magnify. Shorter waves resolve finer detail.</p>
+              <p class="note">Resolution is inversely related to the wavelength used. Electrons have far shorter wavelengths than visible light.</p>
+            </article>
+            <article class="beat predict" data-at="0.26,0.31">
+              <p class="eyebrow mono">Predict</p>
+              <h3>A ribosome is about 25 nm across. Can a light microscope show you one as a separate object?</h3>
+              <ol class="opts mono"><li><b>A</b>Yes, at 1 000×</li><li><b>B</b>No: it is below the 200-nm limit</li><li><b>C</b>Only once it is stained</li></ol>
+              <p class="hint mono">Watch the microscopes change ↓</p>
+            </article>
+            <article class="beat" data-at="0.31,0.42">
+              <p class="eyebrow mono">Answer · B · Light microscopy (LM)</p>
+              <h3>The same cell, through four light microscopes.</h3>
+              <p><b class="k" data-k="m-bright">Brightfield</b>: unstained, nearly invisible; <b class="k" data-k="m-stain">stained</b>, full of contrast, but fixed and dead. <b class="k" data-k="m-phase">Phase-contrast</b> and <b class="k" data-k="m-dic">DIC</b> amplify differences in density, so living cells show up unstained.</p>
+              <p class="note">More magnification can't beat the resolution limit: the ribosomes stay a blur. DIC (Nomarski) makes the image look almost 3-D.</p>
+            </article>
+            <article class="beat" data-at="0.42,0.55">
+              <p class="eyebrow mono">Fluorescence · confocal</p>
+              <h3>Light up one kind of molecule.</h3>
+              <p><b class="k" data-k="m-fluor">Fluorescent</b> dyes or antibodies label specific molecules, which absorb ultraviolet and emit visible light. <b class="k" data-k="m-conf">Confocal</b> microscopy uses a laser to throw away out-of-focus light: one sharp optical section (right).</p>
+              <p class="note">Stacks of sections rebuild a cell in 3-D. Super-resolution microscopy now distinguishes structures only 10–20 nm across.</p>
+            </article>
+            <article class="beat" data-at="0.55,0.7">
+              <p class="eyebrow mono">Electron microscopy (EM) · 1950s</p>
+              <h3>Electrons instead of light.</h3>
+              <p>An electron microscope focuses a beam of electrons with electromagnets. In practice it resolves about <b>2 nm</b>: 100× better than light. The <b class="k" data-k="m-sem">scanning EM</b> (SEM) shows a surface in 3-D; here, the cell's microvilli.</p>
+              <p class="note">SEM samples are coated with a thin film of gold. The beam knocks secondary electrons out of the surface; edges and slopes send out the most, so they look brightest.</p>
+            </article>
+            <article class="beat" data-at="0.7,0.84">
+              <p class="eyebrow mono">Transmission EM (TEM)</p>
+              <h3>A thin slice, stained with heavy metal.</h3>
+              <p>The <b class="k" data-k="m-tem">TEM</b> fires electrons through a very thin section. Heavy-metal atoms stick to some structures and scatter electrons, so membranes, chromatin and ribosomes print dark.</p>
+              <p class="note">EM preparation kills cells and can create artifacts, structures that do not exist in the living cell. Cryo-EM freezes specimens instead; it has resolved single proteins.</p>
+            </article>
+            <article class="beat" data-at="0.84,0.93">
+              <p class="eyebrow mono">Cytology + biochemistry</p>
+              <h3>Seeing is only half of it.</h3>
+              <p>Microscopes are the tools of <b>cytology</b>, the study of cell structure. Knowing what each structure <i>does</i> needed <b>biochemistry</b> too, the study of the cell's chemical processes.</p>
+            </article>
+          </div>
+          <aside class="inst inst-scope" aria-label="Microscopes">
+            <p class="mono label">Resolution · two points <span data-res-d>400</span> nm apart</p>
+            <canvas class="res" data-res width="560" height="200" aria-hidden="true"></canvas>
+            <div class="res-keys mono"><span data-res-lm>Light: two</span><span data-res-em>Electrons: two</span></div>
+            <ol class="modes mono" data-modes>
+              <li data-m="1">Brightfield · unstained</li><li data-m="2">Brightfield · stained</li><li data-m="3">Phase-contrast</li><li data-m="4">DIC (Nomarski)</li><li data-m="0">Fluorescence</li><li data-m="5">Confocal</li><li data-m="6">Scanning EM</li><li data-m="7">Transmission EM</li>
+            </ol>
+            <table class="vs mono">
+              <thead><tr><th></th><th>Light</th><th>Electron</th></tr></thead>
+              <tbody>
+                <tr><td>Lenses</td><td>Glass</td><td>Electromagnets</td></tr>
+                <tr><td>Resolution</td><td>≈ 200 nm</td><td>≈ 2 nm</td></tr>
+                <tr><td>Magnification</td><td>≈ 1 000×</td><td>far higher</td></tr>
+                <tr><td>Specimen</td><td>Can be alive</td><td>Dead (or frozen)</td></tr>
+              </tbody>
+            </table>
+          </aside>
+          <aside class="takeaway" data-take="0.93,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Magnification, resolution, contrast.</span></li><li><span>Light: ≈ 1 000×, ≈ 200 nm, living cells. Electrons: ≈ 2 nm, specimens dead.</span></li><li><span>SEM shows surfaces in 3-D; TEM shows thin slices inside.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 03 · TAKING CELLS APART ------------------------------------------------>
+      <section id="ch3" class="chapter" data-f0="3" data-f1="4" style="--h: 560vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.1 · Cell fractionation</span><h2 class="ch-title" data-chars>Taking cells apart</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0,0.18">
+              <p class="eyebrow mono">Break, then spin</p>
+              <h3>Sorting a cell's parts by size.</h3>
+              <p>Cells are broken up and the soup, a <b>homogenate</b>, goes into a tube spun in a <b>centrifuge</b>. The force sends the largest components to the bottom first, into a <b>pellet</b>.</p>
+              <p class="note">Each spin's liquid, the supernatant, is poured into a fresh tube and spun faster and longer.</p>
+            </article>
+            <article class="beat" data-at="0.18,0.36">
+              <p class="eyebrow mono">1 000 g · 10 min</p>
+              <h3>First out: nuclei.</h3>
+              <p>At low speed only the biggest pieces settle: the <b class="k" data-k="nucleus">nuclei</b>. The tube swings out on the rotor, so “down” is outward.</p>
+              <p class="note">g is the force as a multiple of Earth's gravity. The speeds here are typical values.</p>
+            </article>
+            <article class="beat predict" data-at="0.36,0.41">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Spin the supernatant faster. What settles next?</h3>
+              <ol class="opts mono"><li><b>A</b>Ribosomes</li><li><b>B</b>Mitochondria</li><li><b>C</b>Nothing else will settle</li></ol>
+              <p class="hint mono">Scroll to spin ↓</p>
+            </article>
+            <article class="beat" data-at="0.41,0.57">
+              <p class="eyebrow mono">Answer · B · 20 000 g · 20 min</p>
+              <h3>Then mitochondria.</h3>
+              <p>Next largest: <b class="k" data-k="mito">mitochondria</b>, and in plant cells chloroplasts.</p>
+            </article>
+            <article class="beat" data-at="0.57,0.73">
+              <p class="eyebrow mono">80 000 g · 60 min</p>
+              <h3>Then pieces of membrane.</h3>
+              <p>Fragments of <b class="k" data-k="er">ER and plasma membrane</b> settle as small vesicles, the rough ER's ribosomes still attached.</p>
+            </article>
+            <article class="beat" data-at="0.73,0.86">
+              <p class="eyebrow mono">150 000 g · 3 h</p>
+              <h3>Last: ribosomes.</h3>
+              <p>The smallest components, free <b class="k" data-k="ribo">ribosomes</b>, need the highest speed for hours. What stays in solution is the cytosol.</p>
+            </article>
+            <article class="beat" data-at="0.86,0.93">
+              <p class="eyebrow mono">Function from fractions</p>
+              <h3>How mitochondria got their job.</h3>
+              <p>Biochemical tests found the enzymes of cellular respiration in one fraction. The electron microscope showed that fraction was full of mitochondria. Together: mitochondria are the sites of respiration.</p>
+            </article>
+          </div>
+          <aside class="inst inst-frac" aria-label="Centrifuge">
+            <p class="mono label">Centrifuge</p>
+            <div class="big-clock mono" data-g>0 g</div>
+            <ol class="pellets mono" data-pellets>
+              <li><i style="background:#4a6bff"></i><b>1 000 g · 10 min</b><span>Nuclei</span></li>
+              <li><i style="background:#ff3d85"></i><b>20 000 g · 20 min</b><span>Mitochondria</span></li>
+              <li><i style="background:#44ff7a"></i><b>80 000 g · 60 min</b><span>Membranes (ER, plasma membrane)</span></li>
+              <li><i style="background:#e8ffe8"></i><b>150 000 g · 3 h</b><span>Ribosomes</span></li>
+            </ol>
+            <p class="mono small">Supernatant left at the end: the cytosol.</p>
+          </aside>
+          <aside class="takeaway" data-take="0.93,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Fractionation separates cell parts in bulk by size and density.</span></li><li><span>Out in order: nuclei → mitochondria → membranes → ribosomes.</span></li><li><span>Biochemistry plus microscopy tie each structure to its function.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 04 · TWO KINDS OF CELL ------------------------------------------------>
+      <section id="ch4" class="chapter" data-f0="4" data-f1="5" style="--h: 600vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.2 · Fig. 4.4, 4.6</span><h2 class="ch-title" data-chars>Two kinds of cell</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0,0.16">
+              <p class="eyebrow mono">Common to all cells</p>
+              <h3>Four things every cell has.</h3>
+              <p>A <b class="k" data-k="b-pm">plasma membrane</b>, a selective barrier. <b>Cytosol</b>, a semifluid, jellylike interior. <b class="k" data-k="b-dna">Chromosomes</b> carrying genes as DNA. <b class="k" data-k="b-ribo">Ribosomes</b> that make proteins.</p>
+            </article>
+            <article class="beat" data-at="0.16,0.34">
+              <p class="eyebrow mono">Prokaryotic · Bacteria and Archaea</p>
+              <h3>No nucleus: a nucleoid.</h3>
+              <p>A prokaryote's DNA lies in a <b class="k" data-k="b-dna">nucleoid</b>, a region with no membrane around it. Outside the membrane: a rigid <b class="k" data-k="b-wall">cell wall</b>, often a sticky <b class="k" data-k="b-cap">capsule</b>, <b class="k" data-k="b-fim">fimbriae</b> to attach and <b class="k" data-k="b-flag">flagella</b> to swim.</p>
+              <p class="note">Pro-karyotic: “before nucleus”. Eu-karyotic: “true nucleus”. The capsule or slime layer is the glycocalyx.</p>
+            </article>
+            <article class="beat" data-at="0.34,0.48">
+              <p class="eyebrow mono">Eukaryotic · protists, fungi, animals, plants</p>
+              <h3>Ten times wider; a thousand times the volume.</h3>
+              <p>Pull back: the bacterium sits beside a <b class="k" data-k="cell">eukaryotic cell</b>. Most of its DNA is in a <b class="k" data-k="nucleus">nucleus</b> with a double membrane, and its cytoplasm holds membrane-bound <b>organelles</b>.</p>
+              <p class="note">Bacteria are typically 1–5 µm; eukaryotic cells 10–100 µm. Cytoplasm means everything between the nucleus and the plasma membrane.</p>
+            </article>
+            <article class="beat predict" data-at="0.48,0.53">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Cut one cube into many smaller ones. What happens to the surface?</h3>
+              <ol class="opts mono"><li><b>A</b>It stays the same</li><li><b>B</b>It grows, while the volume stays the same</li><li><b>C</b>It shrinks</li></ol>
+              <p class="hint mono">Watch the cube ↓</p>
+            </article>
+            <article class="beat" data-at="0.53,0.72">
+              <p class="eyebrow mono">Answer · B · Fig. 4.6</p>
+              <h3>Surface grows as the square, volume as the cube.</h3>
+              <p>One 5-unit cube has a surface of <b>150</b> and a volume of <b>125</b>. Cut into 125 unit cubes, the volume is still 125, but the surface is <b>750</b>. The ratio goes from 1.2 to 6.</p>
+              <p class="note">Every amber face is new surface the cut exposed.</p>
+            </article>
+            <article class="beat" data-at="0.72,0.84">
+              <p class="eyebrow mono">Why cells are small</p>
+              <h3>The membrane is the bottleneck.</h3>
+              <p>Each square micrometre of membrane can pass only so much oxygen, food and waste per second. Big organisms have more cells, not bigger ones. Long thin cells such as neurons keep the ratio high, and <b class="k" data-k="villi">microvilli</b> add surface with almost no volume.</p>
+            </article>
+            <article class="beat" data-at="0.84,0.93">
+              <p class="eyebrow mono">Compartments</p>
+              <h3>Membranes make rooms.</h3>
+              <p>Internal membranes divide a eukaryotic cell into compartments, so incompatible chemistry can run at once. Many enzymes are built into the membranes themselves.</p>
+              <p class="note">Each membrane is a phospholipid bilayer with its own mix of proteins, the subject of chapter 5.</p>
+            </article>
+          </div>
+          <aside class="inst inst-sv" aria-label="Surface and volume">
+            <p class="mono label">Figure 4.6 · surface-to-volume</p>
+            <table class="vs mono" data-sv>
+              <thead><tr><th></th><th>1 cube</th><th>125 cubes</th></tr></thead>
+              <tbody>
+                <tr><td>Side</td><td>5</td><td>1</td></tr>
+                <tr><td>Surface</td><td>150</td><td data-sv="s">150</td></tr>
+                <tr><td>Volume</td><td>125</td><td>125</td></tr>
+                <tr><td>S : V</td><td>1.2</td><td data-sv="r">1.2</td></tr>
+              </tbody>
+            </table>
+            <table class="vs mono">
+              <thead><tr><th></th><th>Prokaryote</th><th>Eukaryote</th></tr></thead>
+              <tbody>
+                <tr><td>DNA</td><td>Nucleoid</td><td>Nucleus</td></tr>
+                <tr><td>Organelles</td><td>None (almost)</td><td>Many</td></tr>
+                <tr><td>Size</td><td>1–5 µm</td><td>10–100 µm</td></tr>
+                <tr><td>Ribosomes</td><td>Yes</td><td>Yes</td></tr>
+              </tbody>
+            </table>
+          </aside>
+          <aside class="takeaway" data-take="0.93,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>All cells: plasma membrane, cytosol, DNA, ribosomes.</span></li><li><span>Prokaryotes: nucleoid, no organelles. Eukaryotes: nucleus and organelles.</span></li><li><span>Smaller means more surface per volume: why cells stay small.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- interlude I · sorting -->
+      <section id="int1" class="interlude venn-int" data-f0="5" data-f1="5" style="--h: 300vh">
+        <div class="sticky venn-sticky">
+          <p class="eyebrow mono venn-eyebrow">Sort it out · Where does each part belong?</p>
+          <div class="venn" data-venn="cells" aria-label="Plasma membrane, cytosol, DNA, ribosomes and cell walls occur in both; nucleoid and capsule are prokaryotic; nucleus, mitochondria, ER, Golgi, chloroplasts are eukaryotic">
+            <p class="vn-line"><span data-bin="1">plasma&nbsp;membrane</span> <span data-bin="2">nucleus</span> <span data-bin="0">nucleoid</span> <span data-bin="1">ribosomes</span> <span data-bin="2">mitochondria</span> <span data-bin="1">DNA</span> <span data-bin="0">capsule</span> <span data-bin="2">Golgi</span> <span data-bin="1">cytosol</span> <span data-bin="2">endoplasmic&nbsp;reticulum</span> <span data-bin="1">cell&nbsp;wall*</span> <span data-bin="2">chloroplasts</span></p>
+            <div class="vn-bins"><div class="vn-bin"><b>Prokaryotes only</b></div><div class="vn-bin"><b>Both</b></div><div class="vn-bin"><b>Eukaryotes only</b></div></div>
+          </div>
+          <p class="venn-note mono">* Walls: most prokaryotes, and plants, fungi and some protists. Not animals.</p>
+        </div>
+      </section>
+
+      <!-- 05 · THE PANORAMA ------------------------------------------------------>
+      <section id="ch5" class="chapter" data-f0="5" data-f1="6" style="--h: 600vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.2 · Fig. 4.7</span><h2 class="ch-title" data-chars>The panorama</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0,0.14">
+              <p class="eyebrow mono">An animal cell</p>
+              <h3>Every part has a job.</h3>
+              <p>The tour that follows, in order: the <b class="k" data-k="nucleus">nucleus</b>, <b class="k" data-k="ribo">ribosomes</b>, <b class="k" data-k="rer">endoplasmic reticulum</b>, <b class="k" data-k="golgi">Golgi apparatus</b>, <b class="k" data-k="lyso">lysosomes</b>, <b class="k" data-k="mito">mitochondria</b>, <b class="k" data-k="perox">peroxisomes</b> and the <b class="k" data-k="cyto">cytoskeleton</b>.</p>
+            </article>
+            <article class="beat" data-at="0.14,0.3">
+              <p class="eyebrow mono">Animal cells only</p>
+              <h3>What a plant cell lacks.</h3>
+              <p><b class="k" data-k="lyso">Lysosomes</b> digest. A <b class="k" data-k="centrosome">centrosome</b>, with a pair of centrioles, is where microtubules start. Some animal cells swim with a <b class="k" data-k="flag">flagellum</b>; others absorb through <b class="k" data-k="villi">microvilli</b>.</p>
+              <p class="note">Intermediate filaments, too, are found only in some animals.</p>
+            </article>
+            <article class="beat predict" data-at="0.3,0.35">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Plant cells have chloroplasts to capture energy. Do they still need mitochondria?</h3>
+              <ol class="opts mono"><li><b>A</b>No: chloroplasts do their job</li><li><b>B</b>Yes</li><li><b>C</b>Only at night</li></ol>
+              <p class="hint mono">Watch the cell change ↓</p>
+            </article>
+            <article class="beat" data-at="0.35,0.6">
+              <p class="eyebrow mono">Answer · B · A plant cell</p>
+              <h3>The same kit, plus three.</h3>
+              <p>Chloroplasts make sugar; mitochondria still turn sugar into ATP, so plants keep them. Plants add a <b class="k" data-k="wall">cell wall</b>, <b class="k" data-k="chloro">chloroplasts</b> and a <b class="k" data-k="vac">central vacuole</b>. <b class="k" data-k="plasmod">Plasmodesmata</b> connect neighbours through the wall.</p>
+              <p class="note">This morph is a comparison, not something a cell does: animal and plant cells are separate lineages.</p>
+            </article>
+            <article class="beat" data-at="0.6,0.74">
+              <p class="eyebrow mono">Shared by both</p>
+              <h3>The core kit.</h3>
+              <p>Nucleus, ribosomes, ER, Golgi, mitochondria, peroxisomes, a cytoskeleton and a plasma membrane: every plant and animal cell has them.</p>
+              <p class="note">Most plant cells lack centrioles; in plants and fungi, vacuoles do much of the digesting that lysosomes do in animals.</p>
+            </article>
+            <article class="beat" data-at="0.74,0.88">
+              <p class="eyebrow mono">Begin at the centre</p>
+              <h3>Into the nucleus.</h3>
+              <p>The tour starts where the instructions are kept: the <b class="k" data-k="nucleus">nucleus</b>, about 5 µm across. Going in ×1 000.</p>
+            </article>
+          </div>
+          <aside class="inst inst-pano" aria-label="Animal and plant cells">
+            <p class="mono label">Figure 4.7 · who has what</p>
+            <dl class="rows mono pano-rows" data-pano>
+              <div data-g="b"><dt>Nucleus, ribosomes, ER, Golgi</dt><dd>Both</dd></div>
+              <div data-g="b"><dt>Mitochondria, peroxisomes</dt><dd>Both</dd></div>
+              <div data-g="b"><dt>Cytoskeleton, plasma membrane</dt><dd>Both</dd></div>
+              <div data-g="a"><dt>Lysosomes, centrosome</dt><dd>Animal</dd></div>
+              <div data-g="a"><dt>Flagellum, microvilli</dt><dd>Some animal</dd></div>
+              <div data-g="p"><dt>Cell wall, plasmodesmata</dt><dd>Plant</dd></div>
+              <div data-g="p"><dt>Chloroplasts, central vacuole</dt><dd>Plant</dd></div>
+            </dl>
+            <ul class="key mono key-cols" data-keycols></ul>
+          </aside>
+          <aside class="takeaway" data-take="0.88,0.97" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Both: nucleus, ER, Golgi, mitochondria, peroxisomes, ribosomes, cytoskeleton.</span></li><li><span>Animal only: lysosomes, centrosome with centrioles, (flagella, microvilli).</span></li><li><span>Plant only: cell wall, chloroplasts, central vacuole, plasmodesmata.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- interlude II · plates -->
+      <section id="int2" class="interlude" data-f0="6" data-f1="6" style="--h: 210vh">
+        <div class="int-inner">
+          <h3 class="mega mega-sm" data-mega>Same kit,<br />different cells.</h3>
+          <div class="bento bento-2">
+            <figure class="fig"><div class="plate" data-plate="animal"></div><figcaption class="mono"><b>Plate I</b> · An animal cell, 20 <span class="unit">µm</span> across, in fluorescent dyes.</figcaption></figure>
+            <figure class="fig"><div class="plate" data-plate="plant"></div><figcaption class="mono"><b>Plate II</b> · A plant cell: wall, central vacuole, chloroplasts.</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 · THE NUCLEUS --------------------------------------------------------->
+      <section id="ch6" class="chapter" data-f0="6" data-f1="7" style="--h: 620vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.3 · Fig. 4.8</span><h2 class="ch-title" data-chars>The nucleus</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.04,0.17">
+              <p class="eyebrow mono">Information central</p>
+              <h3>A double membrane, full of holes.</h3>
+              <p>The <b class="k" data-k="envelope">nuclear envelope</b> is two membranes, each a lipid bilayer, 20–40 nm apart. It is perforated by <b class="k" data-k="pore">nuclear pores</b> about 100 nm wide. At the lip of each pore the inner and outer membranes join.</p>
+              <p class="note">The nucleus holds most of the cell's genes; a few are in mitochondria and chloroplasts.</p>
+            </article>
+            <article class="beat" data-at="0.17,0.3">
+              <p class="eyebrow mono">Pore complexes</p>
+              <h3>A gate with a guard.</h3>
+              <p>A <b class="k" data-k="npc">pore complex</b>, an eight-fold ring of proteins, lines every pore. It lets proteins, RNAs and even ribosomal subunits through, and regulates what enters and leaves.</p>
+            </article>
+            <article class="beat" data-at="0.3,0.42">
+              <p class="eyebrow mono">Through the pore</p>
+              <h3>Inside: a net, and the DNA.</h3>
+              <p>The <b class="k" data-k="lamina">nuclear lamina</b>, a net of protein filaments (intermediate filaments, in animal cells), lines the inside of the envelope and holds the nucleus in shape. Beyond it lies the DNA, as <b class="k" data-k="chromatin">chromatin</b>.</p>
+            </article>
+            <article class="beat" data-at="0.42,0.54">
+              <p class="eyebrow mono">Chromatin</p>
+              <h3>DNA wound on protein spools.</h3>
+              <p>Each <b>chromosome</b> is one long DNA molecule with many proteins, among them small basic proteins called <b class="k" data-k="histone">histones</b>, which coil the DNA so it fits. This DNA–protein complex is chromatin.</p>
+              <p class="note">Here, DNA (2 nm wide) wraps about 1.7 turns round each histone core: a nucleosome, about 10 nm across.</p>
+            </article>
+            <article class="beat predict" data-at="0.54,0.59">
+              <p class="eyebrow mono">Predict</p>
+              <h3>The cell is about to divide. What does its chromatin do?</h3>
+              <ol class="opts mono"><li><b>A</b>Unwinds completely</li><li><b>B</b>Coils up until each chromosome is visible</li><li><b>C</b>Leaves through the pores</li></ol>
+              <p class="hint mono">Scroll to find out ↓</p>
+            </article>
+            <article class="beat" data-at="0.59,0.76">
+              <p class="eyebrow mono">Answer · B · Condensation</p>
+              <h3>Coil, loop, condense.</h3>
+              <p>In a dividing cell the chromatin coils further, until each chromosome is thick enough to see in a light microscope. A typical human cell has <b>46</b> chromosomes; eggs and sperm have 23.</p>
+              <p class="note">In a non-dividing cell, stained chromatin looks like a diffuse mass, though the chromosomes are all still there.</p>
+            </article>
+            <article class="beat" data-at="0.76,0.9">
+              <p class="eyebrow mono">The nucleolus</p>
+              <h3>A ribosome factory with no membrane.</h3>
+              <p>In the <b class="k" data-k="nucleolus">nucleolus</b>, ribosomal RNA (rRNA) is made from DNA and joined with proteins imported from the cytoplasm into <b class="k" data-k="subunit">large and small subunits</b>. They leave through the pores, as does <b class="k" data-k="mrna">mRNA</b>, carrying a gene's message.</p>
+            </article>
+          </div>
+          <aside class="inst inst-nuc" aria-label="The nucleus">
+            <p class="mono label">The nucleus, to scale</p>
+            <dl class="rows mono">
+              <div><dt>Nucleus</dt><dd>≈ 5 µm</dd></div>
+              <div><dt>Gap between its two membranes</dt><dd>20–40 nm</dd></div>
+              <div><dt>Nuclear pore</dt><dd>≈ 100 nm</dd></div>
+              <div><dt>Chromosomes (human)</dt><dd>46</dd></div>
+            </dl>
+            <ol class="ladder mono" data-ladder>
+              <li><b>2 nm</b>DNA double helix</li><li><b>10 nm</b>Nucleosomes: beads on a string</li><li><b>30 nm</b>Coiled fibre</li><li><b>300 nm</b>Looped domains</li><li><b>700 nm</b>Condensed chromosome</li>
+            </ol>
+          </aside>
+          <aside class="takeaway" data-take="0.9,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Nuclear envelope: double membrane, pores ≈ 100 nm, lamina inside.</span></li><li><span>Chromatin is DNA + proteins (histones); it condenses into chromosomes to divide.</span></li><li><span>The nucleolus builds ribosomal subunits; they and mRNA leave through pores.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 07 · RIBOSOMES ------------------------------------------------------------>
+      <section id="ch7" class="chapter" data-f0="7" data-f1="8" style="--h: 540vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.3 · Fig. 4.9</span><h2 class="ch-title" data-chars>Ribosomes</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.03,0.18">
+              <p class="eyebrow mono">Protein factories</p>
+              <h3>Two subunits and a message.</h3>
+              <p>A <b class="k" data-k="ribosome">ribosome</b> is rRNA and protein, in a <b class="k" data-k="large">large subunit</b> and a <b class="k" data-k="small">small subunit</b>. In the cytoplasm the two clamp onto an <b class="k" data-k="mrna">mRNA</b> and translate it into a polypeptide.</p>
+              <p class="note">Ribosomes have no membrane, so they are not counted as organelles.</p>
+            </article>
+            <article class="beat" data-at="0.18,0.33">
+              <p class="eyebrow mono">Free ribosomes</p>
+              <h3>Proteins for the cytosol.</h3>
+              <p><b class="k" data-k="free">Free ribosomes</b> float in the cytosol. Most of what they make works there, such as the enzymes that begin breaking down sugar.</p>
+            </article>
+            <article class="beat predict" data-at="0.33,0.38">
+              <p class="eyebrow mono">Predict</p>
+              <h3>This ribosome is making insulin, to be secreted. Where must it work?</h3>
+              <ol class="opts mono"><li><b>A</b>Free in the cytosol</li><li><b>B</b>On the endoplasmic reticulum</li><li><b>C</b>Inside the nucleus</li></ol>
+              <p class="hint mono">Follow it ↓</p>
+            </article>
+            <article class="beat" data-at="0.38,0.58">
+              <p class="eyebrow mono">Answer · B · Bound ribosomes</p>
+              <h3>Threaded into the ER.</h3>
+              <p><b class="k" data-k="bound">Bound ribosomes</b> sit on the outside of the ER or the nuclear envelope. The growing chain is threaded through a <b class="k" data-k="translocon">pore made of protein</b> in the ER membrane into the <b class="k" data-k="lumen">lumen</b>, where it folds.</p>
+              <p class="note">Bound and free ribosomes are identical, and can swap roles. A pancreas cell, which secretes digestive enzymes, has a few million ribosomes.</p>
+            </article>
+            <article class="beat" data-at="0.58,0.76">
+              <p class="eyebrow mono">Glycoproteins</p>
+              <h3>Sugar, added inside.</h3>
+              <p>Most secretory proteins are <b class="k" data-k="glyco">glycoproteins</b>. Enzymes built into the ER membrane attach carbohydrates to them inside the lumen, and the ER membrane keeps them apart from the proteins of the cytosol.</p>
+            </article>
+            <article class="beat" data-at="0.76,0.9">
+              <p class="eyebrow mono">Membrane proteins</p>
+              <h3>Some stay in the membrane.</h3>
+              <p>Proteins destined to be <b class="k" data-k="memprot">membrane proteins</b> are inserted into the ER membrane itself as they grow, anchored by their hydrophobic parts.</p>
+            </article>
+          </div>
+          <aside class="inst inst-ribo" aria-label="Free and bound ribosomes">
+            <p class="mono label">Where a protein is made decides where it goes</p>
+            <table class="vs mono">
+              <thead><tr><th></th><th>Free</th><th>Bound</th></tr></thead>
+              <tbody>
+                <tr><td>Sits</td><td>In cytosol</td><td>On ER</td></tr>
+                <tr><td>Makes</td><td>Cytosol proteins</td><td>Secreted · membrane · lysosome</td></tr>
+                <tr><td>Chain goes</td><td>Into cytosol</td><td>Into ER lumen</td></tr>
+              </tbody>
+            </table>
+            <dl class="rows mono">
+              <div><dt>Amino acids joined</dt><dd data-ribo="aa">0</dd></div>
+              <div><dt>Sugars attached</dt><dd data-ribo="sug">0</dd></div>
+            </dl>
+          </aside>
+          <aside class="takeaway" data-take="0.9,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Ribosomes: rRNA + protein, large and small subunits; not organelles.</span></li><li><span>Free ribosomes make cytosol proteins; bound ones, secreted and membrane proteins.</span></li><li><span>In the ER lumen proteins fold and get sugars: glycoproteins.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 08 · ENDOPLASMIC RETICULUM ------------------------------------------------>
+      <section id="ch8" class="chapter" data-f0="8" data-f1="9" style="--h: 620vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.4 · Fig. 4.10</span><h2 class="ch-title" data-chars>Endoplasmic reticulum</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.03,0.15">
+              <p class="eyebrow mono">The endomembrane system</p>
+              <h3>One membrane system, many rooms.</h3>
+              <p>Nuclear envelope, ER, Golgi, lysosomes, vacuoles, vesicles and the plasma membrane: joined directly, or by <b class="k" data-k="vesicle">vesicles</b>, sacs of membrane that bud from one and fuse with another.</p>
+              <p class="note">The membranes are related but not identical; each is modified on the way.</p>
+            </article>
+            <article class="beat" data-at="0.15,0.3">
+              <p class="eyebrow mono">The ER</p>
+              <h3>More than half the cell's membrane.</h3>
+              <p>The <b class="k" data-k="er">endoplasmic reticulum</b> (“little net within the cytoplasm”) is a network of tubules and sacs, <b class="k" data-k="cisternae">cisternae</b>, around one continuous space, the <b class="k" data-k="lumen">lumen</b>. The lumen runs on into the space inside the nuclear envelope.</p>
+            </article>
+            <article class="beat" data-at="0.3,0.43">
+              <p class="eyebrow mono">Rough ER</p>
+              <h3>Studded with ribosomes.</h3>
+              <p><b class="k" data-k="rer">Rough ER</b> makes secretory proteins and is the cell's membrane factory: it adds proteins and phospholipids to its own membrane and ships the surplus off as <b class="k" data-k="vesicle">transport vesicles</b> from <b class="k" data-k="tER">transitional ER</b>.</p>
+            </article>
+            <article class="beat" data-at="0.43,0.55">
+              <p class="eyebrow mono">Smooth ER</p>
+              <h3>No ribosomes, other jobs.</h3>
+              <p><b class="k" data-k="ser">Smooth ER</b> makes lipids (oils, new phospholipids, steroids such as sex hormones), metabolizes carbohydrates, detoxifies drugs and poisons, and stores calcium ions.</p>
+              <p class="note">Cells that make steroid hormones, in the testes and ovaries, are rich in smooth ER.</p>
+            </article>
+            <article class="beat" data-at="0.55,0.69">
+              <p class="eyebrow mono">Ca²⁺ store · muscle</p>
+              <h3>A spring loaded with calcium.</h3>
+              <p>In muscle cells the smooth ER pumps <b class="k" data-k="ca">calcium ions</b> from the cytosol into its lumen. When a nerve impulse arrives, Ca²⁺ rushes back out into the cytosol and triggers contraction.</p>
+            </article>
+            <article class="beat predict" data-at="0.69,0.74">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Someone takes barbiturates every day. Why does the same dose stop working?</h3>
+              <ol class="opts mono"><li><b>A</b>Their liver cells make more smooth ER</li><li><b>B</b>The drug wears out</li><li><b>C</b>The brain stops listening</li></ol>
+              <p class="hint mono">Watch the smooth ER ↓</p>
+            </article>
+            <article class="beat" data-at="0.74,0.9">
+              <p class="eyebrow mono">Answer · A · Detoxification</p>
+              <h3>Tolerance is more smooth ER.</h3>
+              <p>Liver smooth ER detoxifies drugs by adding hydroxyl groups, making them soluble enough to flush away. Barbiturates and alcohol make the <b class="k" data-k="ser">smooth ER</b> and its enzymes proliferate, so the drug is cleared faster: higher doses are needed.</p>
+              <p class="note">The enzymes act broadly, so tolerance to one drug can extend to others; barbiturate abuse can weaken some antibiotics.</p>
+            </article>
+          </div>
+          <aside class="inst inst-er" aria-label="Rough and smooth ER">
+            <table class="vs mono">
+              <thead><tr><th></th><th>Rough ER</th><th>Smooth ER</th></tr></thead>
+              <tbody>
+                <tr><td>Ribosomes</td><td>Yes</td><td>No</td></tr>
+                <tr><td>Shape</td><td>Flattened sacs</td><td>Tubules</td></tr>
+                <tr><td>Makes</td><td>Secreted proteins, membrane</td><td>Lipids, steroids</td></tr>
+                <tr><td>Also</td><td>Adds sugars</td><td>Detox, Ca²⁺ store</td></tr>
+              </tbody>
+            </table>
+            <div class="meter mono" data-ca>
+              <p class="label">Ca²⁺ · lumen vs cytosol</p>
+              <div class="mbar"><i data-ca-in></i></div><span data-ca-in-t>Lumen 0</span>
+              <div class="mbar cy"><i data-ca-out></i></div><span data-ca-out-t>Cytosol 0</span>
+            </div>
+            <dl class="rows mono"><div><dt>Smooth ER (relative)</dt><dd data-ser>1.0×</dd></div></dl>
+          </aside>
+          <aside class="takeaway" data-take="0.9,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>ER: tubules and cisternae around one lumen, continuous with the nuclear envelope.</span></li><li><span>Rough ER: secretory proteins, new membrane, transport vesicles.</span></li><li><span>Smooth ER: lipids, carbohydrate metabolism, detox, Ca²⁺ storage.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 09 · THE GOLGI ------------------------------------------------------------>
+      <section id="ch9" class="chapter" data-f0="9" data-f1="10" style="--h: 620vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.4 · Fig. 4.11</span><h2 class="ch-title" data-chars>The Golgi apparatus</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.03,0.17">
+              <p class="eyebrow mono">Shipping and receiving</p>
+              <h3>A stack of flattened sacs.</h3>
+              <p>The <b class="k" data-k="golgi">Golgi apparatus</b> is a stack of cisternae, like pita bread, not connected to each other. Its <b class="k" data-k="cis">cis face</b>, near the ER, receives vesicles; its <b class="k" data-k="trans">trans face</b> ships them out.</p>
+              <p class="note">A cell can have hundreds of stacks. Secreting cells have the most.</p>
+            </article>
+            <article class="beat" data-at="0.17,0.33">
+              <p class="eyebrow mono">Finishing work</p>
+              <h3>Modified on the way through.</h3>
+              <p>From cis to trans, teams of enzymes in each cisterna modify the cargo: <b class="k" data-k="sugar">sugars on glycoproteins</b> are removed and replaced; phospholipids are altered. The Golgi makes polysaccharides too, such as the pectins of plant cell walls.</p>
+            </article>
+            <article class="beat" data-at="0.33,0.52">
+              <p class="eyebrow mono">Cisternal maturation</p>
+              <h3>The sacs themselves move.</h3>
+              <p>Vesicles from the ER fuse into a new cis cisterna. Each cisterna <b class="k" data-k="cisterna">matures</b> and moves toward the trans face carrying its cargo, while <b class="k" data-k="retro">vesicles carry enzymes backward</b> to younger cisternae and some proteins back to the ER.</p>
+              <p class="note">The old view had fixed cisternae and vesicles shuttling cargo between them. The truth may lie between: stable centres, dynamic rims.</p>
+            </article>
+            <article class="beat predict" data-at="0.52,0.57">
+              <p class="eyebrow mono">Predict</p>
+              <h3>How does a vesicle leaving the Golgi know where to go?</h3>
+              <ol class="opts mono"><li><b>A</b>It drifts at random</li><li><b>B</b>Molecular tags and docking sites</li><li><b>C</b>The nucleus steers it</li></ol>
+              <p class="hint mono">Watch the trans face ↓</p>
+            </article>
+            <article class="beat" data-at="0.57,0.77">
+              <p class="eyebrow mono">Answer · B · Sorting</p>
+              <h3>Zip codes and docking sites.</h3>
+              <p>Products are <b class="k" data-k="tag">tagged</b>, with phosphate groups for example, like zip codes on mail. Vesicles from the trans face carry molecules that recognize docking sites on their target: a <b class="k" data-k="lysoves">lysosome</b>, or the <b class="k" data-k="pmB">plasma membrane</b>.</p>
+              <p class="note">Some lysosomes arise by budding from the trans face.</p>
+            </article>
+            <article class="beat" data-at="0.77,0.9">
+              <p class="eyebrow mono">Secretion</p>
+              <h3>Delivered.</h3>
+              <p>A <b class="k" data-k="secves">secretory vesicle</b> fuses with the plasma membrane: its contents are released outside and its membrane becomes part of the cell's surface.</p>
+            </article>
+          </div>
+          <aside class="inst inst-golgi" aria-label="Golgi stages">
+            <p class="mono label">Cis → trans · one glycoprotein's sugars</p>
+            <svg class="chart" data-glyco viewBox="0 0 300 120" role="img" aria-label="The sugar tree of a glycoprotein changing from cis to trans"></svg>
+            <ol class="steps mono" data-gsteps>
+              <li>ER: core sugars attached</li><li>Cis: some trimmed</li><li>Medial: new sugars added</li><li>Trans: finished, tagged</li><li>Shipped in a vesicle</li>
+            </ol>
+          </aside>
+          <aside class="takeaway" data-take="0.9,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Golgi: stacked cisternae with a cis (receiving) and trans (shipping) face.</span></li><li><span>It modifies, stores, sorts and ships ER products; makes some polysaccharides.</span></li><li><span>Cisternae mature cis → trans; tags and docking sites target vesicles.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 10 · LYSOSOMES AND VACUOLES -------------------------------------------------->
+      <section id="ch10" class="chapter" data-f0="10" data-f1="11" style="--h: 660vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.4 · Fig. 4.12–4.15</span><h2 class="ch-title" data-chars>Lysosomes and vacuoles</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.03,0.16">
+              <p class="eyebrow mono">Digestive compartments</p>
+              <h3>A sac of acid and enzymes.</h3>
+              <p>A <b class="k" data-k="lysosome">lysosome</b> is a membrane sac of hydrolytic enzymes that work best in its acidic interior. If one leaks, its enzymes are nearly inactive at the cytosol's neutral pH; only mass leakage would digest the cell.</p>
+              <p class="note">Its enzymes and membrane are made by rough ER and processed in the Golgi. Their folded shapes protect them from each other.</p>
+            </article>
+            <article class="beat" data-at="0.16,0.32">
+              <p class="eyebrow mono">Phagocytosis · Fig. 4.12</p>
+              <h3>Engulf, then digest.</h3>
+              <p>A protist or a <b>macrophage</b> engulfs prey into a <b class="k" data-k="foodvac">food vacuole</b>. A <b class="k" data-k="lysosome">lysosome</b> fuses with it, and its enzymes break the food into sugars, amino acids and other monomers that pass into the cytosol.</p>
+            </article>
+            <article class="beat" data-at="0.32,0.48">
+              <p class="eyebrow mono">Autophagy · Fig. 4.13</p>
+              <h3>Recycling itself.</h3>
+              <p>A damaged organelle is wrapped in a <b class="k" data-k="autophag">double membrane</b>; a lysosome fuses with it and dismantles it, returning the pieces to the cytosol. A human liver cell recycles half its macromolecules every week.</p>
+            </article>
+            <article class="beat predict" data-at="0.48,0.53">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Lysosomes lack one lipid-digesting enzyme. What happens to the cell?</h3>
+              <ol class="opts mono"><li><b>A</b>Lipids pile up in the lysosomes</li><li><b>B</b>It makes the enzyme elsewhere</li><li><b>C</b>Nothing</li></ol>
+              <p class="hint mono">Scroll to find out ↓</p>
+            </article>
+            <article class="beat" data-at="0.53,0.64">
+              <p class="eyebrow mono">Answer · A · Storage diseases</p>
+              <h3>Engorged lysosomes.</h3>
+              <p>In inherited <b class="k" data-k="storage">lysosomal storage diseases</b> a hydrolytic enzyme is missing, and lysosomes swell with what they can't digest. In Tay-Sachs disease lipids build up in the brain's cells.</p>
+            </article>
+            <article class="beat" data-at="0.64,0.76">
+              <p class="eyebrow mono">Vacuoles</p>
+              <h3>Large vesicles, many jobs.</h3>
+              <p><b>Vacuoles</b> come from the ER and Golgi. <b>Food vacuoles</b> form by phagocytosis; <b>contractile vacuoles</b> pump excess water out of freshwater protists. A plant's <b class="k" data-k="vac">central vacuole</b> holds cell sap, stores ions, may hold poisons or pigments, and grows the cell by taking up water.</p>
+            </article>
+            <article class="beat" data-at="0.8,0.95">
+              <p class="eyebrow mono">Fig. 4.15 · Review</p>
+              <h3>One system, one flow.</h3>
+              <p>Nuclear envelope → <b class="k" data-k="d-rer">rough ER</b> → vesicles → <b class="k" data-k="d-golgi">Golgi</b> → lysosomes, vacuoles and the <b class="k" data-k="d-pm">plasma membrane</b>. Membrane changes its makeup as it flows. Notice what is <b class="k" data-k="d-mito">not on the map</b>.</p>
+            </article>
+          </div>
+          <aside class="inst inst-lyso" aria-label="Lysosomes">
+            <p class="mono label">Inside a lysosome</p>
+            <div class="ph mono"><span>pH</span><div class="phbar"><i data-ph-l></i><i data-ph-c></i></div><span class="phk"><em>Lysosome ≈ 5</em><em>Cytosol ≈ 7.2</em></span></div>
+            <dl class="rows mono">
+              <div><dt>Macromolecules digested</dt><dd data-lyso="n">0</dd></div>
+              <div><dt>Monomers returned</dt><dd data-lyso="m">0</dd></div>
+            </dl>
+            <p class="mono small">The lysosome's acidity is a widely measured value; the text says only “acidic”.</p>
+          </aside>
+          <aside class="takeaway" data-take="0.95,1.04" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Lysosomes: acidic sacs of hydrolytic enzymes.</span></li><li><span>They digest food (phagocytosis) and the cell's own parts (autophagy).</span></li><li><span>Vacuoles: food, contractile, central; all part of the endomembrane system.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- interlude III · sorting -->
+      <section id="int3" class="interlude venn-int" data-f0="11" data-f1="11" style="--h: 300vh">
+        <div class="sticky venn-sticky">
+          <p class="eyebrow mono venn-eyebrow">Sort it out · Part of the endomembrane system, or not?</p>
+          <div class="venn venn-2" data-venn="endo" aria-label="Nuclear envelope, ER, Golgi, lysosomes, vacuoles, vesicles and plasma membrane are part of the endomembrane system; mitochondria, chloroplasts, peroxisomes and ribosomes are not">
+            <p class="vn-line"><span data-bin="0">nuclear&nbsp;envelope</span> <span data-bin="1">mitochondria</span> <span data-bin="0">Golgi</span> <span data-bin="1">chloroplasts</span> <span data-bin="0">rough&nbsp;ER</span> <span data-bin="1">ribosomes</span> <span data-bin="0">lysosomes</span> <span data-bin="0">vacuoles</span> <span data-bin="1">peroxisomes</span> <span data-bin="0">smooth&nbsp;ER</span> <span data-bin="0">plasma&nbsp;membrane</span> <span data-bin="0">vesicles</span></p>
+            <div class="vn-bins"><div class="vn-bin"><b>Endomembrane system</b></div><div class="vn-bin"><b>Not</b></div></div>
+          </div>
+          <p class="venn-note mono">Ribosomes have no membrane at all. Mitochondria and chloroplasts have a different past.</p>
+        </div>
+      </section>
+
+      <!-- 11 · ENDOSYMBIOSIS ---------------------------------------------------------->
+      <section id="ch11" class="chapter" data-f0="11" data-f1="12" style="--h: 580vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.5 · Fig. 4.16</span><h2 class="ch-title" data-chars>Endosymbiosis</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.05,0.18">
+              <p class="eyebrow mono">Energy converters</p>
+              <h3>Two organelles that change energy's form.</h3>
+              <p><b class="k" data-k="mito">Mitochondria</b> carry out cellular respiration: with oxygen, they turn the energy in sugars and fats into ATP. <b class="k" data-k="chloro">Chloroplasts</b>, in plants and algae, carry out photosynthesis: sunlight into the chemical energy of sugar.</p>
+            </article>
+            <article class="beat" data-at="0.18,0.38">
+              <p class="eyebrow mono">Evolution · the endosymbiont theory</p>
+              <h3>Swallowed, but not digested.</h3>
+              <p>An early ancestor of eukaryotic cells <b class="k" data-k="host">engulfed</b> an <b class="k" data-k="aerobe">oxygen-using prokaryote</b>. Instead of being digested, it lived on inside: an <b>endosymbiont</b>. Over many generations, host and guest merged into one organism, and the guest became the mitochondrion.</p>
+            </article>
+            <article class="beat" data-at="0.38,0.54">
+              <p class="eyebrow mono">A second merger</p>
+              <h3>Then, in one lineage, a photosynthesizer.</h3>
+              <p>At least one of these cells later took in a <b class="k" data-k="cyano">photosynthetic prokaryote</b>, the ancestor of every <b class="k" data-k="chloro">chloroplast</b>.</p>
+              <p class="note">The text discusses this in detail in Concept 25.1.</p>
+            </article>
+            <article class="beat predict" data-at="0.54,0.59">
+              <p class="eyebrow mono">Predict</p>
+              <h3>If mitochondria were once bacteria, what would you expect inside them?</h3>
+              <ol class="opts mono"><li><b>A</b>Their own DNA and ribosomes</li><li><b>B</b>A nucleus</li><li><b>C</b>Chloroplasts</li></ol>
+              <p class="hint mono">Look inside ↓</p>
+            </article>
+            <article class="beat" data-at="0.59,0.8">
+              <p class="eyebrow mono">Answer · A · The evidence</p>
+              <h3>They still behave like cells.</h3>
+              <p>Mitochondria and chloroplasts have <b class="k" data-k="twomem">two membranes</b>, not one; their own <b class="k" data-k="mtdna">circular DNA</b> and <b class="k" data-k="mtribo">ribosomes</b>, like bacteria; and they <b class="k" data-k="divide">grow and divide</b> on their own inside the cell.</p>
+              <p class="note">The engulfed prokaryotes seem to have had two membranes already, which became these double membranes. Their DNA programs some of their own proteins.</p>
+            </article>
+            <article class="beat" data-at="0.8,0.92">
+              <p class="eyebrow mono">Not endomembrane</p>
+              <h3>Outsiders, still.</h3>
+              <p>So mitochondria and chloroplasts are not part of the endomembrane system. Where the peroxisome came from is still debated.</p>
+            </article>
+          </div>
+          <aside class="inst inst-endo" aria-label="Endosymbiosis">
+            <p class="mono label">Evidence, checked off</p>
+            <ol class="evid mono" data-evid>
+              <li>Two membranes</li><li>Own circular DNA</li><li>Own ribosomes</li><li>Grow and divide on their own</li>
+            </ol>
+            <dl class="rows mono"><div><dt>Generations shown</dt><dd data-gen>0</dd></div></dl>
+          </aside>
+          <aside class="takeaway" data-take="0.92,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Mitochondria: respiration → ATP. Chloroplasts: photosynthesis → sugar.</span></li><li><span>Both began as engulfed prokaryotes (endosymbiont theory).</span></li><li><span>Evidence: two membranes, own DNA and ribosomes, divide on their own.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 12 · POWER PLANTS ------------------------------------------------------------>
+      <section id="ch12" class="chapter" data-f0="12" data-f1="13" style="--h: 660vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.5 · Fig. 4.17–4.19</span><h2 class="ch-title" data-chars>Power plants</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.03,0.17">
+              <p class="eyebrow mono">Mitochondrion · Fig. 4.17</p>
+              <h3>A smooth membrane round a folded one.</h3>
+              <p>The <b class="k" data-k="outer">outer membrane</b> is smooth. The <b class="k" data-k="inner">inner membrane</b> folds into <b class="k" data-k="cristae">cristae</b> and divides the inside in two: the narrow <b class="k" data-k="ims">intermembrane space</b> and the <b class="k" data-k="matrix">matrix</b>.</p>
+              <p class="note">1–10 µm long. Some cells have hundreds or thousands; cells that move or contract have the most.</p>
+            </article>
+            <article class="beat" data-at="0.17,0.31">
+              <p class="eyebrow mono">Structure fits function</p>
+              <h3>Folds are surface.</h3>
+              <p>The <b class="k" data-k="matrix">matrix</b> holds enzymes, mitochondrial DNA and free ribosomes. Other proteins of respiration, including <b class="k" data-k="synthase">the enzyme that makes ATP</b>, are built into the inner membrane: the cristae give them room.</p>
+            </article>
+            <article class="beat" data-at="0.31,0.42">
+              <p class="eyebrow mono">Living mitochondria</p>
+              <h3>A network in motion.</h3>
+              <p>Time-lapse films show mitochondria moving, changing shape, <b class="k" data-k="network">fusing and dividing</b>: a branched tubular network, not the static beans of a micrograph.</p>
+            </article>
+            <article class="beat" data-at="0.42,0.6">
+              <p class="eyebrow mono">Chloroplast · Fig. 4.18</p>
+              <h3>Stacks of green poker chips.</h3>
+              <p>Inside a double envelope, flattened sacs called <b class="k" data-k="thylakoid">thylakoids</b> are stacked into <b class="k" data-k="granum">grana</b>. The fluid around them, the <b class="k" data-k="stroma">stroma</b>, holds the chloroplast's DNA, ribosomes and enzymes.</p>
+              <p class="note">Lens-shaped, 3–6 µm. Three compartments: intermembrane space, stroma, thylakoid space. Chloroplasts move along the cytoskeleton and pinch in two.</p>
+            </article>
+            <article class="beat predict" data-at="0.6,0.65">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Cyanide blocks a molecule that makes ATP. Where in the cell will most of it bind?</h3>
+              <ol class="opts mono"><li><b>A</b>Mitochondria</li><li><b>B</b>Ribosomes</li><li><b>C</b>Lysosomes</li></ol>
+              <p class="hint mono">Scroll to find out ↓</p>
+            </article>
+            <article class="beat" data-at="0.65,0.77">
+              <p class="eyebrow mono">Answer · A · Plastids</p>
+              <h3>The chloroplast's family.</h3>
+              <p>Cyanide binds the respiration proteins of the inner mitochondrial membrane. The chloroplast belongs to the <b>plastids</b>: <b class="k" data-k="amylo">amyloplasts</b> store starch in roots and tubers; <b class="k" data-k="chromo">chromoplasts</b> colour fruits and flowers orange and yellow.</p>
+            </article>
+            <article class="beat" data-at="0.77,0.92">
+              <p class="eyebrow mono">Peroxisome · Fig. 4.19</p>
+              <h3>A sealed room for a dangerous reaction.</h3>
+              <p>A <b class="k" data-k="perox">peroxisome</b>, wrapped in one membrane, moves hydrogen from molecules to O₂, making <b class="k" data-k="h2o2">hydrogen peroxide</b> (H₂O₂), then destroys it with an enzyme that turns it into water. Liver peroxisomes detoxify alcohol this way.</p>
+              <p class="note">Keeping the enzymes that make H₂O₂ and those that remove it together, in one compartment, protects the rest of the cell. The dense core is thought to be packed enzyme.</p>
+            </article>
+          </div>
+          <aside class="inst inst-power" aria-label="Energy organelles">
+            <table class="vs mono">
+              <thead><tr><th></th><th>Mitochondrion</th><th>Chloroplast</th></tr></thead>
+              <tbody>
+                <tr><td>Membranes</td><td>2</td><td>2 + thylakoids</td></tr>
+                <tr><td>Folded part</td><td>Cristae</td><td>Grana</td></tr>
+                <tr><td>Fluid</td><td>Matrix</td><td>Stroma</td></tr>
+                <tr><td>Process</td><td>Respiration</td><td>Photosynthesis</td></tr>
+                <tr><td>Size</td><td>1–10 µm</td><td>3–6 µm</td></tr>
+                <tr><td>In</td><td>Nearly all eukaryotes</td><td>Plants, algae</td></tr>
+              </tbody>
+            </table>
+            <p class="mono react" data-react>RH₂ + O₂ → R + H₂O₂ <br />2 H₂O₂ → 2 H₂O + O₂</p>
+          </aside>
+          <aside class="takeaway" data-take="0.92,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Mitochondrion: smooth outer, folded inner membrane (cristae); matrix.</span></li><li><span>Chloroplast: double envelope; thylakoids in grana; stroma.</span></li><li><span>Peroxisome: one membrane; makes H₂O₂, then turns it to water.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- interlude IV · plates -->
+      <section id="int4" class="interlude" data-f0="13" data-f1="13" style="--h: 210vh">
+        <div class="int-inner">
+          <h3 class="mega mega-sm" data-mega>Two membranes,<br />one past.</h3>
+          <div class="bento bento-3">
+            <figure class="fig"><div class="plate" data-plate="mito"></div><figcaption class="mono"><b>Plate III</b> · A mitochondrion, cut open: cristae, matrix.</figcaption></figure>
+            <figure class="fig"><div class="plate" data-plate="chloro"></div><figcaption class="mono"><b>Plate IV</b> · A chloroplast: grana in the stroma.</figcaption></figure>
+            <figure class="fig"><div class="plate" data-plate="perox"></div><figcaption class="mono"><b>Plate V</b> · A peroxisome and its crystalline core.</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 · THE CYTOSKELETON ------------------------------------------------------------>
+      <section id="ch13" class="chapter" data-f0="13" data-f1="14" style="--h: 660vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.6 · Table 4.1</span><h2 class="ch-title" data-chars>The cytoskeleton</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.04,0.15">
+              <p class="eyebrow mono">Support and motility · Fig. 4.20</p>
+              <h3>Not floating: anchored.</h3>
+              <p>Early electron micrographs suggested organelles drifted freely. Better microscopes revealed the <b>cytoskeleton</b>: a network of protein fibres that holds organelles, gives the cell its shape, like the poles of a dome tent, and moves things.</p>
+              <p class="note">It can be dismantled in one place and rebuilt in another, changing the cell's shape. Animal cells, with no wall, depend on it most.</p>
+            </article>
+            <article class="beat" data-at="0.15,0.3">
+              <p class="eyebrow mono">Microtubules · 25 nm</p>
+              <h3>Hollow tubes of tubulin.</h3>
+              <p><b class="k" data-k="mt">Microtubules</b> are hollow rods of <b class="k" data-k="tubulin">tubulin</b> dimers, each made of an <b>α-tubulin</b> and a <b>β-tubulin</b>, in 13 columns round a 15-nm hollow. They resist compression.</p>
+              <p class="note">They shape the cell, separate chromosomes in division and act as tracks for organelles.</p>
+            </article>
+            <article class="beat" data-at="0.3,0.42">
+              <p class="eyebrow mono">Built and torn down</p>
+              <h3>Grow at one end, fall apart at the other.</h3>
+              <p>Microtubules <b class="k" data-k="grow">grow by adding tubulin dimers</b> and can disassemble just as quickly, so their tubulin can be reused elsewhere in the cell.</p>
+            </article>
+            <article class="beat" data-at="0.42,0.56">
+              <p class="eyebrow mono">Motor proteins · Fig. 4.21</p>
+              <h3>Feet that walk on tracks.</h3>
+              <p>A <b class="k" data-k="motor">motor protein</b> bound to a <b class="k" data-k="receptor">receptor</b> on a vesicle walks along a microtubule: one foot holds while the other steps, each step paid for with ATP. This is how vesicles of neurotransmitter reach the tips of axons.</p>
+              <p class="note">This motor, kinesin, steps 8 nm, the length of one tubulin dimer.</p>
+            </article>
+            <article class="beat" data-at="0.56,0.7">
+              <p class="eyebrow mono">Microfilaments · 7 nm</p>
+              <h3>Two twisted strands of actin.</h3>
+              <p><b class="k" data-k="actin">Microfilaments</b> (actin filaments) are solid, thin and bear tension. A network under the membrane holds the cell's shape; bundles stiffen microvilli; with <b class="k" data-k="myosin">myosin</b> they contract muscle, crawl amoebas forward and stream the cytoplasm of plant cells.</p>
+            </article>
+            <article class="beat" data-at="0.7,0.83">
+              <p class="eyebrow mono">Intermediate filaments · 8–12 nm</p>
+              <h3>The permanent frame.</h3>
+              <p><b class="k" data-k="if">Intermediate filaments</b> are ropes of fibrous proteins such as keratin. More permanent than the other two, they fix organelles in place: the nucleus sits in a cage of them, and they form the nuclear lamina.</p>
+              <p class="note">Found only in some animals, including vertebrates. The outer layer of skin is dead cells full of keratin filaments.</p>
+            </article>
+            <article class="beat" data-at="0.83,0.92">
+              <p class="eyebrow mono">Centrosome · Fig. 4.22</p>
+              <h3>Where microtubules begin.</h3>
+              <p>In animal cells, microtubules grow from the <b class="k" data-k="centrosome">centrosome</b> near the nucleus. Inside it is a pair of <b class="k" data-k="centriole">centrioles</b> at right angles, each nine triplets of microtubules in a ring, about 250 nm across.</p>
+            </article>
+          </div>
+          <aside class="inst inst-fib" aria-label="Table 4.1">
+            <p class="mono label">Table 4.1 · drawn to scale</p>
+            <div class="fibres" data-fibres></div>
+            <dl class="rows mono">
+              <div><dt>Kinesin steps</dt><dd data-fib="steps">0</dd></div>
+              <div><dt>ATP spent</dt><dd data-fib="atp">0</dd></div>
+              <div><dt>Distance walked</dt><dd data-fib="nm">0 nm</dd></div>
+            </dl>
+          </aside>
+          <aside class="takeaway" data-take="0.92,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Microtubules (25 nm, tubulin): hollow; resist compression; tracks.</span></li><li><span>Microfilaments (7 nm, actin): tension, shape, muscle, crawling.</span></li><li><span>Intermediate filaments (8–12 nm): permanent; anchor the nucleus.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 14 · CILIA AND FLAGELLA ----------------------------------------------------------->
+      <section id="ch14" class="chapter" data-f0="14" data-f1="15" style="--h: 620vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.6 · Fig. 4.23</span><h2 class="ch-title" data-chars>Cilia and flagella</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.04,0.17">
+              <p class="eyebrow mono">Moving cells, moving fluid</p>
+              <h3>Oars and tails.</h3>
+              <p><b class="k" data-k="cilia">Cilia</b> are short and many; they beat with a power stroke and a recovery stroke, like oars. <b class="k" data-k="flagellum">Flagella</b> are longer and few; they undulate like the tail of a fish.</p>
+              <p class="note">Cilia lining the trachea sweep mucus and debris out of the lungs; cilia in the oviduct move an egg toward the uterus.</p>
+            </article>
+            <article class="beat" data-at="0.17,0.33">
+              <p class="eyebrow mono">“9 + 2”</p>
+              <h3>Nine doublets round two singles.</h3>
+              <p>Under the membrane sheath: nine <b class="k" data-k="doublet">doublets</b> of microtubules in a ring around a <b class="k" data-k="central">central pair</b>. Flexible <b class="k" data-k="links">cross-linking proteins</b>, including the <b class="k" data-k="spoke">radial spokes</b>, hold them together.</p>
+            </article>
+            <article class="beat" data-at="0.33,0.44">
+              <p class="eyebrow mono">Basal body</p>
+              <h3>Anchored by a centriole's twin.</h3>
+              <p>The <b class="k" data-k="basal">basal body</b> that anchors the axoneme is built like a centriole: nine triplets, “9 + 0”. The central pair stops above it.</p>
+              <p class="note">In humans, the basal body of the fertilizing sperm's flagellum enters the egg and becomes a centriole.</p>
+            </article>
+            <article class="beat predict" data-at="0.44,0.49">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Dynein arms on each doublet walk along the next one. If the cross-links were cut, what would happen?</h3>
+              <ol class="opts mono"><li><b>A</b>It would still bend</li><li><b>B</b>The doublets would slide apart</li><li><b>C</b>Nothing</li></ol>
+              <p class="hint mono">Watch two doublets ↓</p>
+            </article>
+            <article class="beat" data-at="0.49,0.68">
+              <p class="eyebrow mono">Answer · B · Dynein</p>
+              <h3>Walking, restrained, becomes bending.</h3>
+              <p><b class="k" data-k="dynein">Dyneins</b> have two feet: one holds while the other releases and grabs one step farther, powered by ATP. With the links cut, the doublets telescope apart. Held together, they can only <b class="k" data-k="bend">bend</b>.</p>
+            </article>
+            <article class="beat" data-at="0.68,0.8">
+              <p class="eyebrow mono">Primary cilium</p>
+              <h3>An antenna.</h3>
+              <p>Nearly every vertebrate cell has one non-moving <b class="k" data-k="primary">primary cilium</b>, “9 + 0”, whose membrane proteins pass signals inward. Cilium signalling is crucial to brain function and embryonic development.</p>
+            </article>
+            <article class="beat predict" data-at="0.8,0.85">
+              <p class="eyebrow mono">Predict · Kartagener's syndrome</p>
+              <h3>Men with an inherited disorder are sterile and prone to lung infections. What could one defect explain both?</h3>
+              <ol class="opts mono"><li><b>A</b>Faulty dyneins in cilia and flagella</li><li><b>B</b>Missing lysosomes</li><li><b>C</b>Too much smooth ER</li></ol>
+            </article>
+            <article class="beat" data-at="0.85,0.92">
+              <p class="eyebrow mono">Answer · A</p>
+              <h3>One motor, two symptoms.</h3>
+              <p>Without working dynein arms, sperm flagella can't swim and tracheal cilia can't clear mucus. One structure, used in two organs.</p>
+            </article>
+          </div>
+          <aside class="inst inst-cil" aria-label="Cilia and flagella">
+            <table class="vs mono">
+              <thead><tr><th></th><th>Cilia</th><th>Flagella</th></tr></thead>
+              <tbody>
+                <tr><td>Number</td><td>Many</td><td>One or a few</td></tr>
+                <tr><td>Length</td><td>Short</td><td>Longer</td></tr>
+                <tr><td>Beat</td><td>Power, recovery</td><td>Undulating wave</td></tr>
+                <tr><td>Core</td><td>9 + 2</td><td>9 + 2</td></tr>
+                <tr><td>Base</td><td>Basal body 9 + 0</td><td>Basal body 9 + 0</td></tr>
+              </tbody>
+            </table>
+            <dl class="rows mono"><div><dt>Links</dt><dd data-links>Intact</dd></div><div><dt>Doublets</dt><dd data-slide>Bend</dd></div></dl>
+          </aside>
+          <aside class="takeaway" data-take="0.92,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Cilia: many, short, oar-like. Flagella: few, long, wave-like.</span></li><li><span>Both: 9 + 2 microtubules, anchored by a 9 + 0 basal body.</span></li><li><span>Dynein walking + cross-links = bending.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 15 · WALLS AND MATRIX ---------------------------------------------------------------->
+      <section id="ch15" class="chapter" data-f0="15" data-f1="16" style="--h: 620vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.7 · Fig. 4.25, 4.26</span><h2 class="ch-title" data-chars>Walls and matrix</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.04,0.18">
+              <p class="eyebrow mono">Plant cell walls</p>
+              <h3>Fibres in a matrix.</h3>
+              <p>The <b class="k" data-k="wall">cell wall</b> protects the plant cell, keeps its shape and stops it taking up too much water. <b class="k" data-k="synth">Cellulose synthase</b> in the plasma membrane spins out <b class="k" data-k="fibril">microfibrils</b> of cellulose, which set in a <b class="k" data-k="matrixw">matrix</b> of other polysaccharides and protein.</p>
+              <p class="note">The same design as steel-reinforced concrete or fibreglass. Walls are 0.1 µm to several µm thick, far thicker than the plasma membrane.</p>
+            </article>
+            <article class="beat" data-at="0.18,0.34">
+              <p class="eyebrow mono">Primary · middle lamella · secondary</p>
+              <h3>Laid down in order.</h3>
+              <p>A young cell secretes a thin, flexible <b class="k" data-k="primary">primary wall</b>. Between neighbours, a <b class="k" data-k="lamella">middle lamella</b> of sticky <b>pectins</b> glues them together. Grown cells may add a <b class="k" data-k="secondary">secondary wall</b> inside, in laminated layers.</p>
+              <p class="note">Wood is mostly secondary walls. Pectin thickens jams and jellies.</p>
+            </article>
+            <article class="beat" data-at="0.34,0.52">
+              <p class="eyebrow mono">The extracellular matrix · Fig. 4.26</p>
+              <h3>No wall: a matrix.</h3>
+              <p>Animal cells secrete an <b>extracellular matrix</b> (ECM). <b class="k" data-k="collagen">Collagen</b>, the most abundant glycoprotein, forms strong fibres woven into a web of <b class="k" data-k="pg">proteoglycan complexes</b>: hundreds of proteoglycans on one long polysaccharide.</p>
+              <p class="note">Collagen is about 40% of all protein in the human body. A proteoglycan can be 95% carbohydrate.</p>
+            </article>
+            <article class="beat" data-at="0.52,0.66">
+              <p class="eyebrow mono">Integrins</p>
+              <h3>Bolted through the membrane.</h3>
+              <p><b class="k" data-k="fn">Fibronectin</b> binds the matrix to <b class="k" data-k="integrin">integrins</b>, two-part proteins that span the membrane and grip <b class="k" data-k="mf">microfilaments</b> inside. Integrins integrate: they pass signals between outside and inside.</p>
+            </article>
+            <article class="beat predict" data-at="0.66,0.71">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Can the matrix outside a cell change which genes are switched on inside it?</h3>
+              <ol class="opts mono"><li><b>A</b>No: the membrane is in the way</li><li><b>B</b>Yes</li></ol>
+              <p class="hint mono">Watch the signal ↓</p>
+            </article>
+            <article class="beat" data-at="0.71,0.9">
+              <p class="eyebrow mono">Answer · B</p>
+              <h3>The matrix talks to the nucleus.</h3>
+              <p>Through fibronectin, integrins and microfilaments, mechanical and chemical <b class="k" data-k="signal">signals reach the nucleus</b> and change which proteins the cell makes. Embryonic cells migrate by lining their microfilaments up with the matrix's grain.</p>
+              <p class="note">So the ECM of a tissue helps coordinate all the cells in it.</p>
+            </article>
+          </div>
+          <aside class="inst inst-ecm" aria-label="Wall and matrix">
+            <table class="vs mono">
+              <thead><tr><th></th><th>Plant wall</th><th>Animal ECM</th></tr></thead>
+              <tbody>
+                <tr><td>Fibres</td><td>Cellulose</td><td>Collagen</td></tr>
+                <tr><td>Matrix</td><td>Polysaccharides, protein</td><td>Proteoglycans</td></tr>
+                <tr><td>Anchor</td><td>Plasma membrane</td><td>Fibronectin → integrins</td></tr>
+                <tr><td>Jobs</td><td>Shape, protection, water</td><td>Support, adhesion, signals</td></tr>
+              </tbody>
+            </table>
+            <ol class="steps mono" data-sig><li>Matrix pulls on fibronectin</li><li>Integrin changes shape</li><li>Microfilaments transmit</li><li>Nucleus: genes switch</li></ol>
+          </aside>
+          <aside class="takeaway" data-take="0.9,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Plant wall: cellulose microfibrils in a polysaccharide–protein matrix.</span></li><li><span>Primary wall, middle lamella (pectin), secondary wall.</span></li><li><span>ECM: collagen, proteoglycans, fibronectin; integrins link it to the cytoskeleton.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 16 · CELL JUNCTIONS ---------------------------------------------------------------------->
+      <section id="ch16" class="chapter" data-f0="16" data-f1="17" style="--h: 620vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.7 · Fig. 4.27, 4.28</span><h2 class="ch-title" data-chars>Cell junctions</h2></header>
+          <div class="beats">
+            <article class="beat" data-at="0.03,0.17">
+              <p class="eyebrow mono">Plasmodesmata · Fig. 4.27</p>
+              <h3>Walls, with doors.</h3>
+              <p><b class="k" data-k="plasmod">Plasmodesmata</b> are channels through plant cell walls, lined with plasma membrane that runs continuously from cell to cell and filled with cytosol. Water and small solutes pass freely; sometimes proteins and RNA.</p>
+              <p class="note">They unify most of a plant into one living continuum.</p>
+            </article>
+            <article class="beat" data-at="0.2,0.34">
+              <p class="eyebrow mono">Animal junctions · Fig. 4.28</p>
+              <h3>Three ways to join.</h3>
+              <p>In <b class="k" data-k="epi">epithelia</b>, the sheets of cells lining the body's surfaces, neighbours are joined by <b>tight junctions</b>, <b>desmosomes</b> and <b>gap junctions</b>. Here, the lining of the intestine.</p>
+            </article>
+            <article class="beat" data-at="0.34,0.48">
+              <p class="eyebrow mono">Tight junctions</p>
+              <h3>A seal.</h3>
+              <p>At <b class="k" data-k="tight">tight junctions</b>, specific proteins press neighbouring membranes together in continuous belts. Fluid poured on top can't leak between the cells. Skin is watertight because of them.</p>
+            </article>
+            <article class="beat" data-at="0.48,0.6">
+              <p class="eyebrow mono">Desmosomes</p>
+              <h3>Rivets.</h3>
+              <p><b class="k" data-k="desmo">Desmosomes</b> fasten cells into strong sheets, anchored inside by intermediate filaments of tough <b class="k" data-k="keratin">keratin</b>. Some “muscle tears” are ruptured desmosomes.</p>
+            </article>
+            <article class="beat predict" data-at="0.6,0.65">
+              <p class="eyebrow mono">Predict</p>
+              <h3>Inject dye into one heart-muscle cell. Where does it go?</h3>
+              <ol class="opts mono"><li><b>A</b>It stays in that cell</li><li><b>B</b>It spreads into neighbouring cells</li><li><b>C</b>It leaks between the cells</li></ol>
+              <p class="hint mono">Watch the dye ↓</p>
+            </article>
+            <article class="beat" data-at="0.65,0.86">
+              <p class="eyebrow mono">Answer · B · Gap junctions</p>
+              <h3>Channels from cell to cell.</h3>
+              <p><b class="k" data-k="gap">Gap junctions</b> are pores of membrane proteins through which ions, sugars, amino acids and other small molecules pass from cytoplasm to cytoplasm. Heart muscle and embryos depend on them.</p>
+              <p class="note">They work like plasmodesmata, but their pores are made of protein, not lined with membrane.</p>
+            </article>
+          </div>
+          <aside class="inst inst-junc" aria-label="Junctions">
+            <dl class="rows mono junc-rows" data-junc>
+              <div data-k="0"><dt>Plasmodesma</dt><dd>Plant · channel lined by membrane</dd></div>
+              <div data-k="1"><dt>Tight junction</dt><dd>Seal · stops leaks</dd></div>
+              <div data-k="2"><dt>Desmosome</dt><dd>Rivet · keratin anchors</dd></div>
+              <div data-k="3"><dt>Gap junction</dt><dd>Protein pore · cell to cell</dd></div>
+            </dl>
+            <dl class="rows mono"><div><dt>Dye between cells</dt><dd data-dye="leak">blocked</dd></div><div><dt>Cells reached by injected dye</dt><dd data-dye="n">1</dd></div></dl>
+          </aside>
+          <aside class="takeaway" data-take="0.9,1" aria-label="Takeaway">
+            <p class="tk-h mono">Takeaway</p>
+            <ol><li><span>Plants: plasmodesmata join cytoplasm through walls.</span></li><li><span>Tight junctions seal; desmosomes rivet (keratin).</span></li><li><span>Gap junctions: protein pores between cytoplasms.</span></li></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- interlude V -->
+      <section id="int5" class="interlude interlude-short" data-f0="17" data-f1="17" style="--h: 160vh">
+        <div class="int-inner center">
+          <h3 class="mega mega-weight" data-weight>None of it works<br />alone.</h3>
+        </div>
+      </section>
+
+      <!-- 17 · GREATER THAN THE SUM -------------------------------------------------------------->
+      <section id="ch17" class="chapter" data-f0="17" data-f1="18" style="--h: 700vh">
+        <div class="sticky">
+          <header class="ch-head"><span class="ch-num mono">4.8 · Fig. 4.29</span><h2 class="ch-title" data-chars>Greater than the sum</h2></header>
+          <div class="map mono" data-map aria-hidden="true">
+            <div class="map-col c0">
+              <h4>Genetic control<span>4.3</span></h4>
+              <div data-row><b>Nucleus</b><span>Double membrane with pores; chromatin, nucleoli. Holds the genes; builds ribosomal subunits.</span></div>
+              <div data-row><b>Ribosome</b><span>Two subunits of rRNA and protein; free or bound. Protein synthesis.</span></div>
+            </div>
+            <div class="map-col c1">
+              <h4>Endomembrane system<span>4.4</span></h4>
+              <div data-row><b>Endoplasmic reticulum</b><span>Rough: secretory proteins, glycoproteins, membrane. Smooth: lipids, detox, Ca²⁺.</span></div>
+              <div data-row><b>Golgi apparatus</b><span>Cis → trans stacks. Modifies, sorts and ships; makes polysaccharides.</span></div>
+              <div data-row><b>Lysosome</b><span>Hydrolytic enzymes. Digests food, macromolecules, old organelles.</span></div>
+              <div data-row><b>Vacuole</b><span>Digestion, storage, waste, water balance, plant growth.</span></div>
+            </div>
+            <div class="map-col c2">
+              <h4>Energy<span>4.5</span></h4>
+              <div data-row><b>Mitochondrion</b><span>Two membranes, cristae. Cellular respiration.</span></div>
+              <div data-row><b>Chloroplast</b><span>Two membranes, thylakoids in grana, stroma. Photosynthesis.</span></div>
+              <div data-row><b>Peroxisome</b><span>One membrane. Makes H₂O₂, converts it to water.</span></div>
+            </div>
+            <div class="map-col c3">
+              <h4>Shape, motion, contact<span>4.6–4.7</span></h4>
+              <div data-row><b>Cytoskeleton</b><span>Microtubules, microfilaments, intermediate filaments. Support, motility.</span></div>
+              <div data-row><b>Wall · ECM</b><span>Cellulose wall; collagen, proteoglycans, fibronectin, integrins.</span></div>
+              <div data-row><b>Junctions</b><span>Plasmodesmata; tight, desmosome, gap.</span></div>
+            </div>
+            <p class="map-src">Concept summary · after Campbell Biology in Focus, chapter 4</p>
+          </div>
+          <div class="beats">
+            <article class="beat" data-at="0.04,0.18">
+              <p class="eyebrow mono">§4.8 · A macrophage</p>
+              <h3>One cell, every system at once.</h3>
+              <p>A <b class="k" data-k="macro">macrophage</b>, a white blood cell, crawls toward a <b class="k" data-k="bact">bacterium</b> and reaches out with thin extensions, <b class="k" data-k="filo">filopodia</b>, pushed by <b class="k" data-k="actin">actin filaments</b>.</p>
+            </article>
+            <article class="beat" data-at="0.18,0.36">
+              <p class="eyebrow mono">Engulf · digest</p>
+              <h3>Swallowed, then dissolved.</h3>
+              <p>The membrane wraps the bacterium into a phagocytic vesicle. <b class="k" data-k="lyso">Lysosomes</b>, made by the endomembrane system, fuse with it and digest it.</p>
+            </article>
+            <article class="beat" data-at="0.36,0.55">
+              <p class="eyebrow mono">Who made the tools?</p>
+              <h3>Every part depends on the others.</h3>
+              <p>The lysosomes' enzymes and the cytoskeleton's proteins were made on <b class="k" data-k="ribo">ribosomes</b>, programmed by genetic messages sent from the DNA in the <b class="k" data-k="nucleus">nucleus</b>. All of it runs on ATP from <b class="k" data-k="mito">mitochondria</b>.</p>
+            </article>
+            <article class="beat" data-at="0.57,0.72">
+              <p class="eyebrow mono">Concept summary</p>
+              <h3>Every part, one page.</h3>
+              <p>Structure fits function, from the nucleus to the junctions.</p>
+            </article>
+            <article class="beat" data-at="0.74,0.86">
+              <p class="eyebrow mono">Emergent properties</p>
+              <h3>Life appears at the level of the cell.</h3>
+              <p>No organelle is alive on its own. The cell's functions arise from the order among its parts.</p>
+            </article>
+            <article class="beat beat-final" data-at="0.86,1.01">
+              <h3 class="final">A cell is greater than the sum of its&nbsp;parts.</h3>
+            </article>
+          </div>
+          <aside class="inst inst-sum" aria-label="Systems at work">
+            <p class="mono label">Who is working now</p>
+            <ol class="route mono" data-route>
+              <li data-r="0"><i></i>Cytoskeleton · actin pushes filopodia</li>
+              <li data-r="1"><i></i>Plasma membrane · wraps the prey</li>
+              <li data-r="2"><i></i>Lysosomes · fuse and digest</li>
+              <li data-r="3"><i></i>Ribosomes · made the enzymes</li>
+              <li data-r="4"><i></i>Nucleus · sent the instructions</li>
+              <li data-r="5"><i></i>Mitochondria · supply ATP</li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- outro ------------------------------------------------------------------------>
+      <section id="outro" class="outro" data-f0="18" data-f1="18" style="--h: 130vh">
+        <div class="outro-inner">
+          <p class="byline">A Tour of the Cell <span class="dim">— a study by <span data-byline>Florian Kroker McCormack</span></span></p>
+          <p class="colophon">Built by hand in WebGL: a cell of 393&thinsp;216 points that can be stained, sliced, centrifuged and turned into a plant; a raymarched journey from the nuclear pore to the plasma membrane; organelles cut open; a cytoskeleton built one tubulin at a time. Every number is from the text or from <code>src/science</code>.</p>
+          <dl class="notes mono">
+            <div><dt>Source</dt><dd>Urry, Cain, Wasserman, Minorsky, Orr, <i>Campbell Biology in Focus</i>, 3rd ed., chapter 4. Figure numbers refer to it.</dd></div>
+            <div><dt>Added</dt><dd>Chromatin levels (2, 10, 30, 300, 700 nm), kinesin's 8-nm step, the 13-protofilament lattice and centrifuge speeds are standard values not stated in this chapter.</dd></div>
+            <div><dt>Not to scale</dt><dd>Point densities, molecule sizes in the cell views, and time. The animal → plant morph is a comparison, not a process.</dd></div>
+          </dl>
+          <button class="replay mono" data-to="0">Back to the lens ↑</button>
+        </div>
+      </section>
+    </main>
+
+    <noscript><p class="noscript">This lesson is rendered live in WebGL and needs JavaScript.</p></noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
