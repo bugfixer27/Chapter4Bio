@@ -68,6 +68,7 @@ class InSet implements WorldSet {
     u.uStore.value = k.store
     u.uExo.value = k.exo
     u.uCa.value = k.ca
+    u.uLam.value = 1 - 0.85 * s.st.chromOn
     void target
     r.setRenderTarget(this.out)
     r.clear(true, true, false)

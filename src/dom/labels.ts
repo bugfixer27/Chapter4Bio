@@ -30,6 +30,7 @@ export type L = {
   paper?: boolean
   el?: HTMLElement
   sub?: HTMLElement
+  txt?: string
   last?: number
   x?: number
   y?: number
@@ -173,7 +174,11 @@ export function buildLabels(engine: Engine) {
       l.last = a
       l.el!.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(${l.left ? '-100%' : '0'}, -50%)`
       const t = l.text()
-      if (l.sub!.textContent !== t) l.sub!.textContent = t
+      if (l.txt !== t) {
+        l.txt = t
+        // the labels are upper-cased; a micro sign must not be (µm would read as ΜM)
+        l.sub!.innerHTML = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/µ/g, '<i class="mu">µ</i>')
+      }
     }
 
     /* the spotlight: the key term being read wins, then the moment's subject */
@@ -203,6 +208,6 @@ export function buildLabels(engine: Engine) {
     /* in the particle cell, the structure the key term names glows */
     const m = film.outer === 'cell' && vocab.active ? MASK[vocab.active] ?? 0 : 0
     engine.hiMask = m
-    engine.hiAmt = m ? 0.9 * vocab.strength : 0
+    engine.hiAmt = m ? (film.F > 17 ? 0.5 : 0.9) * vocab.strength : 0   // in §4.8 the whole cell stays in view
   }
 }

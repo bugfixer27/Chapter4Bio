@@ -78,8 +78,8 @@ void endo(vec3 p, inout Hit h){
   pod2 = max(pod2, -dot(normalize(p), normalize(cc)) * length(p) + 40.0 - 30.0 * smoothstep(0.0, 0.6, uEngulf2));
   float engulf2 = smoothstep(0.0, 0.25, uEngulf2) * (1.0 - smoothstep(0.55, 0.8, uEngulf2));
   host = mix(host, smin(host, pod2, 4.0), engulf2);
-  addM(h, host, C_PM);
-  if (host < 0.0) { h.fill = 0.012; h.fcol = vec3(0.2, 0.35, 0.5); }
+  addM(h, host, C_PM * 0.5);
+  if (host < 0.0) { h.fill = 0.01; h.fcol = vec3(0.2, 0.35, 0.5); }
   // nucleus: a double envelope
   float n = length(p - vec3(-18.0, 8.0, 0.0)) - 17.0;
   addM(h, n, C_NUC);
@@ -290,8 +290,8 @@ void main(){
     Hit hh = world(q);
     float px = t * 0.0016;
     float line = exp(-sq(hh.d / max(TH * 0.55, px)));
-    sec.rgb = hh.col * line * 1.8 + hh.fcol * hh.fill * 3.2;
-    sec.a = clamp(line + hh.fill * 3.0, 0.0, 1.0);
+    sec.rgb = hh.col * line * 2.2 + hh.fcol * hh.fill * 6.0;
+    sec.a = clamp(line + hh.fill * 6.0, 0.0, 1.0);
     t += 0.01;
   }
   // behind the cut: the membranes glow where a ray passes through them
@@ -301,7 +301,7 @@ void main(){
     float d = abs(hh.d);
     float st = clamp(d * 0.6, TH * 0.35, 3.0);
     float fall = exp(-t * 0.006);
-    acc += hh.col * exp(-sq(d / TH)) * st * 1.4 * fall;
+    acc += hh.col * exp(-sq(d / TH)) * st * 1.1 * fall;
     acc += hh.fcol * hh.fill * st * 0.25 * fall;
     t += st;
     if (t > 600.0) break;

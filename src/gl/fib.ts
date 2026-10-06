@@ -26,7 +26,7 @@ import { blob, glob, V, molMat } from './mol'
 
 export const FIB = {
   mt0: new THREE.Vector3(0, -200, 0),
-  mt1: new THREE.Vector3(-320, -150, 120),
+  mt1: new THREE.Vector3(-320, -150, 200),
   actin: new THREE.Vector3(70, -150, 0),
   myo: new THREE.Vector3(70, -150, 0),
   ifil: new THREE.Vector3(130, -150, 0),
@@ -197,7 +197,7 @@ export class Cytoskeleton {
     const head = blob([...glob(V(0, 0, 0), 2.4, 10, 17, V(1.3, 0.85, 0.9))], 26)
     this.kinHeads = [new THREE.Mesh(head, molMat(col('#ff5fb0'))), new THREE.Mesh(head, molMat(col('#ff5fb0')))]
     this.kinStalk = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 1, 8), molMat(col('#ff8fc8')))
-    this.cargo = new THREE.Mesh(new THREE.SphereGeometry(28, 48, 32), molMat(col('#8cf2ff'), { grain: 0.3 }))
+    this.cargo = new THREE.Mesh(new THREE.SphereGeometry(28, 48, 32), molMat(col('#4fa6b8'), { grain: 0.3 }))
     this.receptor = new THREE.Mesh(blob(glob(V(0, 0, 0), 2.6, 8, 23), 22), molMat(col('#59e1ff')))
     for (const o of [...this.kinHeads, this.kinStalk, this.cargo, this.receptor]) ((o.frustumCulled = false), this.kin.add(o))
     this.scene.add(this.kin)
@@ -391,9 +391,9 @@ export class Cytoskeleton {
 
     /* kinesin: hand over hand along MT1, 8 nm a step; the trailing head swings past the leading one */
     const rate = 1.6
-    const tt = st.walk * 34 + time * 0.05
+    const tt = st.walk * 15 + (st.kin > 0.01 ? (time * 0.6) % 1 : 0) * 0
     const k = Math.floor(tt * rate)
-    this.stepCount = Math.max(0, Math.floor(st.walk * 34 * rate))
+    this.stepCount = Math.max(0, Math.floor(st.walk * 24))
     const f = tt * rate - k
     const sw = f < 0.5 ? smooth01(f / 0.5) : 1
     const base = FIB.mt1.clone().add(new THREE.Vector3(80 + k * 8, R_MT + 3.2, 0))

@@ -47,9 +47,9 @@ export function setLabels(engine: Engine): L[] {
     { id: 'npc', set: 'in', r: [6.17, 6.2, 6.29, 6.31], at: fix(onShell(0, 7.5, 508)), text: () => 'Pore complex · eight-fold ring', c: C.npc },
     { set: 'in', r: [6.04, 6.07, 6.3, 6.33], at: fix(onShell(-30, 50, 505.6)), text: () => 'Ribosomes on the outer membrane', c: C.rib },
     { id: 'lamina', set: 'in', r: [6.35, 6.37, 6.42, 6.44], at: fix(onShell(10, 22, 496)), text: () => 'Nuclear lamina', c: C.ifl },
-    { id: 'chromatin', set: 'in', r: [6.42, 6.45, 6.75, 6.78], at: () => CHROMO.clone().add(pathA(40 * 2.1)).add(V(0, 2, 0)), text: () => 'Chromatin · DNA + proteins', c: C.nuc },
+    { id: 'chromatin', set: 'in', r: [6.42, 6.45, 6.64, 6.67], at: () => CHROMO.clone().add(pathA(40 * 2.1)).add(V(0, 2, 0)), text: () => 'Chromatin · DNA + proteins', c: C.nuc },
     { id: 'histone', set: 'in', r: [6.44, 6.47, 6.57, 6.6], at: () => CHROMO.clone().add(pathA(8 * 2.1)), text: () => 'Nucleosome · DNA round 8 histones', c: '#c8a0ff', left: true },
-    { set: 'in', r: [6.62, 6.65, 6.76, 6.78], at: () => CHROMO.clone().add(V(0, 70, 0)), text: () => (film.F < 6.69 ? '30-nm fibre, looping' : 'Condensed chromosome · two sister chromatids'), c: C.nuc },
+    { set: 'in', r: [6.62, 6.65, 6.76, 6.78], at: () => CHROMO.clone().add(film.F < 6.69 ? V(0, 70, 0) : V(0, 26, 0)), text: () => (film.F < 6.69 ? '30-nm fibre, looping' : 'Condensed chromosome · two sister chromatids'), c: C.nuc },
     { id: 'nucleolus', set: 'in', r: [6.78, 6.81, 6.92, 6.95], at: fix(NUCLEOLUS.clone().add(V(0, 36, 0))), text: () => 'Nucleolus · no membrane', c: C.nuc },
     { id: 'subunit', set: 'in', r: [6.8, 6.83, 6.95, 6.97], at: fix(onShell(-20, 10, 488)), text: () => 'Ribosomal subunits, heading for the pores', c: C.rib },
     { id: 'mrna', set: 'in', r: [6.82, 6.85, 6.95, 6.97], at: fix(onShell(-60, 30, 512)), text: () => 'mRNA leaving', c: '#ff8a5a' },
@@ -181,7 +181,7 @@ function fibLinks() {
 }
 function kinPos() {
   const st = fibStage(film.F)
-  const k = Math.floor((st.walk * 34) * 1.6)
+  const k = Math.floor(st.walk * 15 * 1.6)
   return FIB.mt1.clone().add(V(80 + k * 8, 13.6, 0))
 }
 void GOLGI_C

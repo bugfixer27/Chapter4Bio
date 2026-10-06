@@ -59,24 +59,30 @@ void junctions(vec3 p, vec2 lq, float side, inout vec3 e, float st){
   // tight-junction strands: a belt of ridges just below the top
   float tj = smoothstep(TOP - 9.5, TOP - 8.0, p.y) * (1.0 - smoothstep(TOP - 2.0, TOP - 1.0, p.y));
   float strands = 0.5 + 0.5 * sin(p.y * 6.0 + sin(atan(lq.y, lq.x) * 9.0) * 2.0);
-  e += vec3(0.6, 1.0, 1.0) * tj * edge * (0.6 + 0.8 * strands) * st * (1.0 + 2.0 * float(uHi == 1.0));
+  e += vec3(0.6, 1.0, 1.0) * tj * edge * (0.6 + 0.8 * strands) * st * (1.0 + 3.5 * float(uHi == 1.0));
   // desmosomes: plaques (≈ 0.5 µm) at two heights, keratin bundles fanning inward
   for (int k = 0; k < 2; k++) {
     float y0 = k == 0 ? 52.0 : 12.0;
     float a = atan(lq.y, lq.x);
-    float sec = fract(a / 6.2832 * 6.0 + 0.5 + float(k) * 0.37) - 0.5;
+    float sec = fract(a / 6.2832 * 6.0 + 0.5 + float(k) * 0.08) - 0.5;   // near each face's centre
     float plaque = exp(-sq((p.y - y0) / 2.5)) * exp(-sq(sec / 0.06)) * edge;
     e += vec3(0.9, 0.7, 1.0) * plaque * st * 2.4 * (1.0 + 2.0 * float(uHi == 2.0));
     // keratin filaments: lines from the plaque into the cytoplasm
-    float inward = clamp(-side / 14.0, 0.0, 1.0);
-    float fan = exp(-sq((p.y - y0 - sin(sec * 30.0 + inward * 4.0) * inward * 10.0) / 0.5)) * exp(-sq(sec / (0.06 + inward * 0.12))) * step(side, 0.0) * (1.0 - inward);
-    e += vec3(0.7, 0.45, 1.0) * fan * st * 0.9 * (1.0 + float(uHi == 2.0));
+    // bundles leave the plaque and splay into the cytoplasm, each gently curved
+    float into = -side;
+    float dy = p.y - y0;
+    float r = length(vec2(into, dy));
+    float th = atan(dy, into + 0.8);
+    float ray = 0.5 + 0.5 * cos(th * 14.0 + 0.35 * sin(r * 0.22 + float(k) * 2.0) + sec * 9.0);
+    ray *= ray; ray *= ray; ray *= ray;                     // thin lines
+    float fan = ray * step(0.0, into) * step(abs(th), 1.15) * smoothstep(18.0, 4.0, r) * exp(-sq(sec / 0.14));
+    e += vec3(0.7, 0.45, 1.0) * fan * st * 0.7 * (1.0 + float(uHi == 2.0));
   }
   // gap junctions: patches of pores bridging the gap
   for (int k = 0; k < 2; k++) {
     float y0 = k == 0 ? 32.0 : -14.0;
     float a = atan(lq.y, lq.x);
-    float sec = fract(a / 6.2832 * 6.0 + float(k) * 0.21) - 0.5;
+    float sec = fract(a / 6.2832 * 6.0 + 0.5 + 0.06 + float(k) * 0.05) - 0.5;   // just behind the cut
     float gpatch = exp(-sq((p.y - y0) / 3.0)) * exp(-sq(sec / 0.09));
     float dots = smoothstep(0.35, 0.1, length(fract(vec2(p.y, sec * 60.0) * 0.8) - 0.5));
     e += vec3(1.0, 0.9, 0.4) * gpatch * exp(-sq(side / 0.35)) * (0.4 + dots) * st * 2.2 * (1.0 + 2.0 * float(uHi == 3.0));
@@ -105,12 +111,12 @@ void main(){
     float lvl = clamp(uDye * 3.2 - dist * 1.0, 0.0, 1.0);
     c += vec3(1.0, 0.85, 0.25) * lvl * 0.35 * inside;
     // the dye poured on top
-    float above = smoothstep(TOP + 0.5, TOP + 1.5, q.y) + (1.0 - smoothstep(TOP - 9.0, TOP - 8.0, q.y)) * step(TOP - 8.5, q.y) * step(0.0, d) * 0.0;
-    c += vec3(0.3, 1.0, 0.5) * uDyeTop * (step(0.0, d) * smoothstep(TOP - 8.5, TOP - 7.5, q.y) * 0.45 + above * 0.2);
+    float above = smoothstep(TOP + 0.5, TOP + 1.5, q.y) * (1.0 - smoothstep(TOP + 14.0, TOP + 30.0, q.y)) * step(0.0, d) * uDyeTop;
+    c += vec3(0.3, 1.0, 0.5) * above * 0.5;
     vec3 e = vec3(0.0);
     junctions(q, lq, sdHex2(lq, S * 0.5), e, 1.0);
     c += e * 0.8;
-    sec = vec4(c, clamp(line + inside * 0.92 + above * 0.6, 0.0, 1.0));
+    sec = vec4(c, clamp(line + inside * 0.45 + above * 0.5, 0.0, 1.0));
     t += 0.01;
   }
   for (int i = 0; i < 140; i++) {
@@ -119,8 +125,9 @@ void main(){
     float d = cellD(p, id, lq);
     float ad = abs(d);
     float st = clamp(ad * 0.6, TH * 0.4, 4.0);
-    float fall = exp(-t * 0.0028);
-    acc += vec3(0.45, 0.9, 1.0) * exp(-sq(ad / TH)) * st * 0.9 * fall;
+    // fade with distance, and with depth behind the cut, so the cutaway reads as one layer of cells
+    float fall = exp(-t * 0.0028) * exp(-max(0.0, uCutZ - p.z) * 0.03 * uCutOn);
+    acc += vec3(0.45, 0.9, 1.0) * exp(-sq(ad / TH)) * st * 0.9 * fall * (p.y > TOP ? 0.35 : 1.0);   // the brush border is dense: dim it
     if (d < 0.0) {
       float nd = nucleusD(p, lq);
       acc += vec3(0.3, 0.45, 1.0) * exp(-sq(nd / 0.5)) * st * 0.6 * fall;

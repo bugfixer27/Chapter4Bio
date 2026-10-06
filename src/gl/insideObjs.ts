@@ -36,7 +36,7 @@ export const DOCK_N = DOCK.clone().sub(NC).normalize()
 /** where it first meets its mRNA, out in the cytosol */
 export const HERO_FREE = new THREE.Vector3(10, 26, 10)
 /** the chromatin demonstration, inside the nucleus */
-export const CHROMO = new THREE.Vector3(-95, -14, 4)
+export const CHROMO = new THREE.Vector3(-130, -14, 4)
 
 /* ------------------------------------------------------------- chromatin
    One fibre of nucleosomes. c = 0 beads on a string (spaced 20 nm, running
@@ -98,6 +98,7 @@ vec3 chromPos(float i){
   // the fibre still coils inside the loops
   vec3 tl = normalize(loopPos(i + 1.0, 17.0, 66.0, 16.0, 4.0) - d + 1e-4);
   d += solenoid(i, tl) * 0.8;
+  d = vec3(-d.y, d.x, d.z);                  // laid on its side: clear of the nucleolus, and wide like the screen
   cc += solenoid(i, normalize(loopPos(i + 1.0, 26.0, 150.0, 55.0, 9.0) - cc + 1e-4));
   float k1 = smoothstep(0.0, 1.0, clamp(c * 1.3 - st, 0.0, 1.0));
   float k2 = smoothstep(0.0, 1.0, clamp((c - 1.0) * 1.3 - st, 0.0, 1.0));
@@ -158,7 +159,10 @@ function chromatinMesh() {
         vec3 n = normalize(cross(t, vec3(0.2, 1.0, 0.3)));
         vec3 b = cross(t, n);
         mat3 R = mat3(n, b, t);
-        vec3 p = c + R * position;
+        // 6000 nucleosomes stand in for the ~10⁶ of a real chromosome, so as it condenses each is drawn
+        // larger, until the chromatids read as the solid bodies a light microscope shows
+        float grow = 1.0 + 1.6 * smoothstep(1.6, 3.0, uC);
+        vec3 p = c + R * position * grow;
         vec4 mv = viewMatrix * vec4(p, 1.0);
         vN = normalize(mat3(viewMatrix) * (R * normal));
         vV = mv.xyz;
@@ -178,7 +182,7 @@ function chromatinMesh() {
         float rim = 1.0 - max(dot(n, v), 0.0); rim *= rim;
         vec3 base = vPart > 0.5 ? vec3(0.4, 0.62, 1.0) : vec3(0.82, 0.55, 1.0);
         vec3 c = base * (0.25 + 0.55 * dif) + base * rim * 1.3;
-        c *= exp(-max(0.0, length(vV) - 30.0) * 0.004) * uFade;
+        c *= exp(-max(0.0, length(vV) - 30.0) * 0.0022) * uFade;
         o = vec4(c, 1.0);
       }`,
   })
@@ -207,7 +211,8 @@ function chromatinMesh() {
         vec3 y = d / max(L, 1e-4);
         vec3 x = normalize(cross(y, vec3(0.3, 0.2, 1.0)));
         vec3 z = cross(x, y);
-        vec3 p = (a + b) * 0.5 + mat3(x, y, z) * (position * vec3(1.0, L, 1.0));
+        float grow = 1.0 + 1.6 * smoothstep(1.6, 3.0, uC);
+        vec3 p = (a + b) * 0.5 + mat3(x, y, z) * (position * vec3(grow, L, grow));
         vec4 mv = viewMatrix * vec4(p, 1.0);
         vN = normalize(mat3(viewMatrix) * (mat3(x, y, z) * normal));
         vV = mv.xyz;
@@ -222,7 +227,7 @@ function chromatinMesh() {
         vec3 n = normalize(vN); vec3 v = normalize(-vV);
         float rim = 1.0 - abs(dot(n, v));
         vec3 c = vec3(0.4, 0.62, 1.0) * (0.35 + 1.2 * rim * rim);
-        c *= exp(-max(0.0, length(vV) - 30.0) * 0.004) * uFade;
+        c *= exp(-max(0.0, length(vV) - 30.0) * 0.0022) * uFade;
         o = vec4(c, 1.0);
       }`,
   })
@@ -367,6 +372,10 @@ export class InsideObjects {
 
     /* bound and free ribosomes */
     this.ribL.visible = this.ribS.visible = st.ribOn > 0.01
+    // while chromatin is the subject, the envelope's ribosomes recede into the dark
+    const rf = 1 - 0.85 * st.chromOn
+    ;(this.ribL.material as THREE.ShaderMaterial).uniforms.uFade.value = rf
+    ;(this.ribS.material as THREE.ShaderMaterial).uniforms.uFade.value = rf
 
     /* the hero ribosome: subunits meet on an mRNA, translate, then (bound) dock */
     const hv = st.hero > 0.01

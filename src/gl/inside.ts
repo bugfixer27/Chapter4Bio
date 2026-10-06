@@ -41,7 +41,7 @@ ${HASH}${NOISE}${SDF3}${RAY}
 uniform sampler2D uMeshCol, uMeshDepth;
 uniform float uNear, uFar;
 uniform vec3 uFwd;
-uniform float uVesK, uSer, uGolgiPh, uCutOn, uCutZ, uBudR, uBudK, uVesR, uPhago, uLysoFuse, uDigest, uAuto, uAutoFuse, uStore, uExo, uCa, uFade, uFocus, uNPC, uLumen;
+uniform float uVesK, uSer, uGolgiPh, uCutOn, uCutZ, uBudR, uBudK, uVesR, uPhago, uLysoFuse, uDigest, uAuto, uAutoFuse, uStore, uExo, uCa, uFade, uFocus, uNPC, uLumen, uLam;
 uniform vec3 uBud, uVes;
 
 const vec3 NC = vec3(${NCx}.0, 0.0, 0.0);
@@ -420,8 +420,9 @@ void main(){
     float gran = sid == 2 ? 0.55 + 0.6 * smoothstep(0.55, 0.75, worley(hitP * 0.4)) : 1.0;
     behind = base * (dif * 0.55 * gran + rim * 1.3) * exp(-t * 0.0015);
     if (sid == 1) behind += vec3(0.6, 0.5, 1.0) * rim * 0.4;
+    if (sid == 5 || sid == 1) behind *= uLam;         // pores and lamina recede while chromatin is the subject
   }
-  vec3 col = acc + (1.0 - A) * behind;
+  vec3 col = acc * (0.35 + 0.65 * uLam) + (1.0 - A) * behind;
   o = vec4(col * uFade, 1.0);
 }
 `
@@ -439,7 +440,7 @@ export class Inside {
         uRes: U.uRes, uTime: U.uTime, uMeshCol: { value: null }, uMeshDepth: { value: null }, uNear: { value: 0.1 }, uFar: { value: 4000 }, uFwd: { value: new THREE.Vector3() },
         uSer: { value: 1 }, uGolgiPh: { value: 0 }, uCutOn: { value: 0 }, uCutZ: { value: 0 }, uBud: { value: new THREE.Vector3() }, uBudR: { value: 0 }, uBudK: { value: 0 },
         uVes: { value: new THREE.Vector3() }, uVesR: { value: 0 }, uVesK: { value: 0 }, uPhago: { value: 0 }, uLysoFuse: { value: 0 }, uDigest: { value: 0 }, uAuto: { value: 0 }, uAutoFuse: { value: 0 },
-        uStore: { value: 0 }, uExo: { value: 0 }, uCa: { value: 0 }, uFade: { value: 1 }, uFocus: { value: 50 }, uNPC: { value: 1 }, uLumen: { value: 1 },
+        uStore: { value: 0 }, uExo: { value: 0 }, uCa: { value: 0 }, uFade: { value: 1 }, uFocus: { value: 50 }, uNPC: { value: 1 }, uLumen: { value: 1 }, uLam: { value: 1 },
       }),
     )
   }

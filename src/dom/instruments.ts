@@ -258,7 +258,7 @@ export function buildInstruments(engine: Engine | null) {
     if (ch === 12) R.react?.classList.toggle('on', u > 0.77)
     if (ch === 13) {
       const st = fibStage(F)
-      const n = Math.floor(st.walk * 34 * 1.6)
+      const n = Math.floor(st.walk * 15 * 1.6)
       setText(R.steps, String(n))
       setText(R.atp, String(n))
       setText(R.nm, `${n * KINESIN_STEP_NM} nm`)

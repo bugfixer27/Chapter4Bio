@@ -989,6 +989,8 @@ export function buildCell() {
           pPlant = p;
           pMap = vec3(0.0);
           gain *= uBact * (part > 1.5 && part < 2.5 ? 0.35 : part > 5.5 ? 0.6 : 1.0) * (1.0 - uDigest * 0.7);
+          // close up, the packed interior piles up additively and burns out: thin it with nearness
+          if (part > 1.5 && part < 4.5) gain *= 0.3 + 0.7 * smoothstep(4.0, 12.0, length(cameraPosition - p));
         } else if (tag == 0) {
           float w = gnoise(vec3(p * 0.35 + vec3(0.0, uTime * 0.15, 0.0)));
           p *= 1.0 + 0.006 * w;
@@ -1011,6 +1013,7 @@ export function buildCell() {
           if (tag == 3 && aInfo.z > 0.5) hit = hit || ((uHiMask >> 15) & 1) == 1;
           ch *= hit ? 1.0 + 1.6 * uHiAmt : 1.0 - 0.8 * uHiAmt;
           if (hit) size *= 1.0 + 0.35 * uHiAmt;
+          if (hit && tag == 21) ch *= 1.0 + 2.0 * uHiAmt;      // the vacuole's sap is faint: lift it when it is the subject
         }
 
         /* animal → plant: the same kit rearranged, three structures added, five taken away */
@@ -1025,9 +1028,9 @@ export function buildCell() {
         if (plantOnly > 0.5) {
           float k = clamp(uPlant * 1.6 - 0.4 - fract(seed * 3.7) * 0.2, 0.0, 1.0);
           gain *= k;
-          if (tag == 19) p = pPlant * (1.0 + (1.0 - k) * 0.12);
+          if (tag == 19) { p = pPlant * (1.0 + (1.0 - k) * 0.12); gain *= aInfo.z > 0.5 ? 1.0 : 0.3; size *= 0.8; }
           if (tag == 21) p = mix(VAC_CENTER, pPlant, mix(0.25, 1.0, k));
-          if (tag == 20) p = pPlant;
+          if (tag == 20) { p = pPlant; gain *= 1.3; }
         }
 
         /* the flow map: every point lies down on its place in the diagram */
@@ -1088,6 +1091,7 @@ export function buildCell() {
           }
           p = mix(p, q, 1.0);
           if (tag == 6) gain *= 1.0 + 0.6 * k * (0.5 + 0.5 * sin(uTime * 3.0 + aInfo.z));
+          if (tag == 0 || tag == 10) gain *= 1.0 + 1.2 * k;            // the crawling outline reads
         }
 
         /* fractionation: the cell is broken up, and four spins sort its pieces into pellets */
@@ -1269,6 +1273,5 @@ export const MASK: Record<string, number> = {
   chloro: 1 << T.CHLORO,
   vac: 1 << T.VAC,
   plasmod: (1 << T.WALL) | (1 << T.PM),
-  'b-pm': 1 << T.BACT, 'b-dna': 1 << T.BACT, 'b-ribo': 1 << T.BACT, 'b-wall': 1 << T.BACT, 'b-cap': 1 << T.BACT, 'b-fim': 1 << T.BACT, 'b-flag': 1 << T.BACT,
   macro: (1 << T.PM) | (1 << T.ACTIN), filo: 1 << T.ACTIN,
 }

@@ -125,7 +125,8 @@ section { position: relative; height: var(--h, 100vh); }
 .rows .cool dd { color: var(--cool); }
 .label { color: var(--dim); margin-bottom: 8px; }
 /* units with a micro sign must never be upper-cased: µm would become ΜM */
-[data-scale], [data-scale-bar], .rows dd, .unit { text-transform: none; }
+[data-scale], [data-scale-bar], .rows dd, .unit, .mu { text-transform: none; }
+.mu { font-style: normal; }
 .inst-alt .ruler { max-height: 46vh; }
 .legend { display: flex; align-items: center; gap: 10px; color: var(--dim); margin-top: 6px; }
 .thermal-bar { flex: 1; height: 6px; background: linear-gradient(90deg, #0d0a26, #5e1480, #d42346, #ff5a1f, #ffe29c); border-radius: 1px; }
@@ -544,6 +545,7 @@ a:focus-visible, button:focus-visible { outline: 1px solid var(--heat); outline-
 .vs th:first-child { text-align: left; }
 .vs td { padding: 6px 0; border-top: 1px solid var(--hair); text-align: right; color: var(--fg); }
 .vs td:first-child { text-align: left; color: var(--dim); }
+.vs td + td, .vs th + th { padding-left: 14px; }
 
 /* centrifuge */
 .pellets { list-style: none; display: grid; margin: 8px 0 6px; }

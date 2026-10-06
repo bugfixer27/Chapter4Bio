@@ -25,8 +25,30 @@ function trap(msg: string) {
 addEventListener('error', (e) => trap('ERR ' + e.message))
 addEventListener('unhandledrejection', (e) => trap('REJ ' + String((e as PromiseRejectionEvent).reason)))
 
+/* upper-cased type would turn the micro sign into a capital mu (µm → ΜM): shield every one */
+function guardMicro() {
+  const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+  const hits: Text[] = []
+  for (let n = walk.nextNode(); n; n = walk.nextNode()) if (n.nodeValue?.includes('µ') && !(n.parentElement?.classList.contains('mu'))) hits.push(n as Text)
+  for (const t of hits) {
+    const parts = t.nodeValue!.split('µ')
+    const frag = document.createDocumentFragment()
+    parts.forEach((s, i) => {
+      if (i) {
+        const m = document.createElement('i')
+        m.className = 'mu'
+        m.textContent = 'µ'
+        frag.append(m)
+      }
+      if (s) frag.append(s)
+    })
+    t.replaceWith(frag)
+  }
+}
+
 async function boot() {
   await document.fonts?.ready
+  guardMicro()
   buildType()
   initScroll()
   const venns = buildVenn()
